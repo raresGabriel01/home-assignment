@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './t-grid.component.html',
-  styleUrl: './t-grid.component.scss'
+  styleUrl: './t-grid.component.scss',
 })
-export class TGridComponent {
-
-}
+export class TGridComponent {}
