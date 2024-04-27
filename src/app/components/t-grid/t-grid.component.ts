@@ -23,7 +23,6 @@ export class TGridComponent<T> {
   columns: ColumnData<T>[];
 
   ngAfterContentInit() {
-    console.log('test     sssssdxzxzxZXXzasddasd');
     this.columns = this.columnQuery.map((column) => ({ ...column }));
   }
 }
