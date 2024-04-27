@@ -1,1 +1,12 @@
-<p>t-grid works!</p>
+<table>
+  <thead>
+    <tr>
+      <th *ngFor="let column of columns">{{ column.name }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data">
+      <td *ngFor="let column of columns">{{ item[column.property] }}</td>
+    </tr>
+  </tbody>
+</table>

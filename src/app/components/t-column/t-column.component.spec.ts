@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TGridComponent } from './t-grid.component';
+import { TColumnComponent } from './t-column.component';
 
-describe('TGridComponent', () => {
-  let component: TGridComponent<any>;
-  let fixture: ComponentFixture<TGridComponent<any>>;
+describe('TColumnComponent', () => {
+  let component: TColumnComponent<any>;
+  let fixture: ComponentFixture<TColumnComponent<any>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TGridComponent],
+      imports: [TColumnComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TGridComponent);
+    fixture = TestBed.createComponent(TColumnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
