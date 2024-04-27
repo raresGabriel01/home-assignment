@@ -3,7 +3,7 @@
     <tr>
       <th
         *ngFor="let column of columns"
-        [ngClass]="{ sortable: column.sortable }"
+        [ngClass]="{ sortable: sortable && column.sortable }"
         (click)="handleColumnClick(column)"
       >
         <div>
