@@ -8,10 +8,9 @@ describe('TGridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TGridComponent]
-    })
-    .compileComponents();
-    
+      imports: [TGridComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(TGridComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

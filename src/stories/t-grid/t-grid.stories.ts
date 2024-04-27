@@ -5,15 +5,14 @@ const meta: Meta<TGridComponent> = {
   title: 'Assignment/t-grid',
   component: TGridComponent,
   tags: ['autodocs'],
-  
 };
 
 export default meta;
 
 export const Basic: StoryFn<TGridComponent> = (args: TGridComponent) => ({
-    props: args,
-    template: `
+  props: args,
+  template: `
         <t-grid></t-grid>
-    `
-})
-Basic.args = {}
+    `,
+});
+Basic.args = {};

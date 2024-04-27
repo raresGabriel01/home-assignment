@@ -1,10 +1,9 @@
 ---
 name: General issue template
 about: A generic template for issues.
-title: ''
-labels: ''
+title: ""
+labels: ""
 assignees: raresGabriel01
-
 ---
 
 # Description
