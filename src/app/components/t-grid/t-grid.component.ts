@@ -21,6 +21,11 @@ export type SortChangeEvent = {
   direction: Direction;
 };
 
+export type PaginationChangeEvent = {
+  currentPage: number;
+  pageSize: number | null;
+};
+
 @Component({
   selector: 't-grid',
   standalone: true,
@@ -31,34 +36,66 @@ export type SortChangeEvent = {
 export class TGridComponent<T> {
   @Input() data: T[] | Observable<T[]>;
   @Input() sortable: boolean;
+  @Input() pageSize: number | null;
   @Output() sortChange = new EventEmitter<SortChangeEvent>();
+  @Output() paginationChange = new EventEmitter<PaginationChangeEvent>();
   @ContentChildren(TColumnComponent) columnQuery: QueryList<
     TColumnComponent<T>
   >;
 
   originalData: T[] = [];
+  sortedData: T[] = [];
   displayData: T[] = [];
-  columns: TColumnComponent<T>[];
+  currentPage: number = 1;
   sortProperty?: keyof T;
-  direction?: Direction = Direction.NONE;
+  direction: Direction = Direction.NONE;
 
   ngOnInit() {
     if (this.data instanceof Observable) {
       this.data.subscribe((data) => {
-        this.displayData = [...data];
+        this.displayData = data.slice(0, this.pageSize || data.length);
         this.originalData = [...data];
+        this.sortedData = [...data];
       });
     } else {
-      this.displayData = [...this.data];
+      this.displayData = this.data.slice(0, this.pageSize || this.data.length);
       this.originalData = [...this.data];
+      this.sortedData = [...this.data];
     }
   }
 
-  ngAfterContentInit() {
-    this.columns = this.columnQuery.map((column) => ({ ...column }));
+  updatePageNumber(pageNumber: number) {
+    if (!this.pageSize) {
+      return;
+    }
+
+    if (
+      pageNumber < 1 ||
+      pageNumber > Math.ceil(this.originalData.length / this.pageSize)
+    ) {
+      return;
+    }
+
+    this.currentPage = pageNumber;
+
+    this.displayData = this.sortedData.slice(
+      (this.currentPage - 1) * this.pageSize,
+      this.currentPage * this.pageSize,
+    );
+
+    this.paginationChange.emit({
+      pageSize: this.pageSize,
+      currentPage: this.currentPage,
+    });
   }
 
-  changeDirection() {
+  handlePageSizeChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.pageSize = parseInt(input.value);
+    this.updatePageNumber(1);
+  }
+
+  updateDirection() {
     if (this.direction === Direction.NONE) {
       this.direction = Direction.ASCENDING;
     } else if (this.direction === Direction.ASCENDING) {
@@ -75,9 +112,9 @@ export class TGridComponent<T> {
 
   sortData() {
     if (this.direction === Direction.NONE) {
-      this.displayData = [...this.originalData];
-    } else {
-      this.displayData.sort((a, b) => {
+      this.sortedData = [...this.originalData];
+    } else if (this.direction === Direction.ASCENDING) {
+      this.sortedData.sort((a, b) => {
         const valueA = a[this.sortProperty as keyof T];
         const valueB = b[this.sortProperty as keyof T];
 
@@ -87,6 +124,8 @@ export class TGridComponent<T> {
           return this.direction === Direction.ASCENDING ? 1 : -1;
         return 0;
       });
+    } else {
+      this.sortedData.reverse();
     }
   }
 
@@ -100,7 +139,11 @@ export class TGridComponent<T> {
       this.direction = Direction.NONE;
     }
 
-    this.changeDirection();
+    this.updateDirection();
     this.sortData();
+
+    if (this.pageSize) {
+      this.updatePageNumber(1);
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { StoryObj, moduleMetadata, type Meta } from '@storybook/angular';
 import {
+  PaginationChangeEvent,
   SortChangeEvent,
   TGridComponent,
 } from '../../app/components/t-grid/t-grid.component';
@@ -18,10 +19,10 @@ const meta: Meta<TGridComponent<MockUser>> = {
   render: (args) => ({
     props: {
       ...args,
-      logEvent: (e: SortChangeEvent) => console.log(e),
+      logEvent: (e: SortChangeEvent | PaginationChangeEvent) => console.log(e),
     },
     template: `
-      <t-grid [data]="data" [sortable]="sortable" (sortChange)="logEvent($event)">
+      <t-grid [data]="data" [sortable]="sortable" [pageSize]="pageSize" (sortChange)="logEvent($event)" (paginationChange)="logEvent($event)">
         <t-column [name]="'ID'" [property]="'id'" [sortable]="false"></t-column>
         <t-column [name]="'First Name'" [property]="'firstName'" [sortable]="true"></t-column>
         <t-column [name]="'Last Name'" [property]="'lastName'" [sortable]="true"></t-column>
@@ -52,6 +53,7 @@ export const SortableGrid: Story = {
   args: {
     data: MOCK_DATA,
     sortable: true,
+    pageSize: null,
   },
 };
 
@@ -59,5 +61,14 @@ export const NonSortableGrid: Story = {
   args: {
     data: MOCK_DATA,
     sortable: false,
+    pageSize: null,
+  },
+};
+
+export const PaginatedGrid: Story = {
+  args: {
+    data: MOCK_DATA,
+    sortable: true,
+    pageSize: 5,
   },
 };

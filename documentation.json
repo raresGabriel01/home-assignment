@@ -62,7 +62,7 @@
         },
         {
             "name": "TColumnComponent",
-            "id": "component-TColumnComponent-75be8281db44da66855c48c53275602b23a0e268ffce9eef2dc2ed29487dd6321002897571ca03f930e2bb5e39ce2cdb27082892b4e34d2724028f704163ccce",
+            "id": "component-TColumnComponent-017f5b074f8107752c97ed84aa2418f10f5f8e487d62a222899b29d4d591c52ca7c6be5d30008c18d0d32834ecaa2f0bec9a07f554a7ccdacf4848c2593f59b9",
             "file": "src/app/components/t-column/t-column.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -82,7 +82,7 @@
                     "name": "name",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 11,
                     "type": "string",
                     "decorators": []
                 },
@@ -90,7 +90,7 @@
                     "name": "property",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 12,
                     "type": "",
                     "decorators": []
                 },
@@ -98,7 +98,7 @@
                     "name": "sortable",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
+                    "line": 13,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -115,7 +115,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\nexport enum Direction {\r\n  NONE,\r\n  ASCENDING,\r\n  DESCENDING\r\n}\r\n\r\n@Component({\r\n  selector: 't-column',\r\n  standalone: true,\r\n  imports: [],\r\n  templateUrl: './t-column.component.html',\r\n  styleUrl: './t-column.component.scss',\r\n})\r\nexport class TColumnComponent<T> {\r\n  @Input() name: string;\r\n  @Input() property: keyof T;\r\n  @Input() sortable: boolean;\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 't-column',\r\n  standalone: true,\r\n  imports: [],\r\n  templateUrl: './t-column.component.html',\r\n  styleUrl: './t-column.component.scss',\r\n})\r\nexport class TColumnComponent<T> {\r\n  @Input() name: string;\r\n  @Input() property: keyof T;\r\n  @Input() sortable: boolean;\r\n}\r\n",
             "styleUrl": "./t-column.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -125,7 +125,7 @@
         },
         {
             "name": "TGridComponent",
-            "id": "component-TGridComponent-556967499bc2b91b41ad1e195d4cafb684a70ad905b0547cd573e12ba0331db6fc8c04e53887183aa5e1a087e2726260b4b24649adedd0d220637bb5463c1f01",
+            "id": "component-TGridComponent-fc4980064c7b28b6cd8f85ebad9bbd1a6497789a0f8ea9ab345af4a61eb1539caaeac2e9a3f61fa58bba5a1d82316c418739467bdfcf7c2d974d73f5ba72b4b8",
             "file": "src/app/components/t-grid/t-grid.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -145,20 +145,37 @@
                     "name": "data",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 32,
                     "type": "T[] | Observable<T[]>",
+                    "decorators": []
+                },
+                {
+                    "name": "pageSize",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 34,
+                    "type": "number | null",
                     "decorators": []
                 },
                 {
                     "name": "sortable",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 33,
                     "type": "boolean",
                     "decorators": []
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "sortChange",
+                    "defaultValue": "new EventEmitter<SortChangeEvent>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 35,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [
                 {
                     "name": "columnQuery",
@@ -167,7 +184,7 @@
                     "type": "QueryList<TColumnComponent<T>>",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 36,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -185,7 +202,16 @@
                     "type": "TColumnComponent<T>[]",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 42
+                },
+                {
+                    "name": "currentPage",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number | null",
+                    "optional": true,
+                    "description": "",
+                    "line": 45
                 },
                 {
                     "name": "direction",
@@ -195,7 +221,7 @@
                     "type": "Direction",
                     "optional": true,
                     "description": "",
-                    "line": 21
+                    "line": 44
                 },
                 {
                     "name": "displayData",
@@ -205,7 +231,26 @@
                     "type": "T[]",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 41
+                },
+                {
+                    "name": "originalData",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "T[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 40
+                },
+                {
+                    "name": "sortProperty",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 43
                 }
             ],
             "methodsClass": [
@@ -215,32 +260,12 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 37,
+                    "line": 63,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
                 {
-                    "name": "ngAfterContentInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 33,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 23,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "sort",
+                    "name": "handleColumnClick",
                     "args": [
                         {
                             "name": "column",
@@ -252,7 +277,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 47,
+                    "line": 95,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -266,6 +291,36 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "ngAfterContentInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 59,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 47,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "sortData",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 78,
+                    "deprecated": false,
+                    "deprecationMessage": ""
                 }
             ],
             "deprecated": false,
@@ -286,13 +341,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ContentChildren, Input, QueryList } from '@angular/core';\r\nimport { Observable } from 'rxjs';\r\nimport { Direction, TColumnComponent } from '../t-column/t-column.component';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 't-grid',\r\n  standalone: true,\r\n  imports: [CommonModule, TColumnComponent],\r\n  templateUrl: './t-grid.component.html',\r\n  styleUrl: './t-grid.component.scss',\r\n})\r\nexport class TGridComponent<T> {\r\n  @Input() data: T[] | Observable<T[]>;\r\n  @Input() sortable: boolean;\r\n  @ContentChildren(TColumnComponent) columnQuery: QueryList<\r\n    TColumnComponent<T>\r\n  >;\r\n  displayData: T[] = [];\r\n  columns: TColumnComponent<T>[];\r\n  direction?: Direction = Direction.NONE;\r\n\r\n  ngOnInit() {\r\n    if (this.data instanceof Observable) {\r\n      this.data.subscribe((data) => {\r\n        this.displayData = [...data];\r\n      });\r\n    } else {\r\n      this.displayData = [...this.data];\r\n    }\r\n  }\r\n\r\n  ngAfterContentInit() {\r\n    this.columns = this.columnQuery.map((column) => ({ ...column }));\r\n  }\r\n\r\n  changeDirection() {\r\n    if (this.direction === Direction.NONE) {\r\n      this.direction = Direction.ASCENDING;\r\n    } else if (this.direction === Direction.ASCENDING) {\r\n      this.direction = Direction.DESCENDING;\r\n    } else {\r\n      this.direction = Direction.NONE;\r\n    }\r\n  }\r\n\r\n  sort(column: TColumnComponent<T>) {\r\n    if (!this.sortable || !column.sortable) {\r\n      return;\r\n    }\r\n\r\n    this.changeDirection();\r\n\r\n    this.displayData.sort((a, b) => {\r\n      const valueA = a[column.property];\r\n      const valueB = b[column.property];\r\n\r\n      if (valueA < valueB) return this.direction === Direction.ASCENDING ? -1 : 1;\r\n      if (valueA > valueB) return this.direction === Direction.ASCENDING ? 1 : -1;\r\n      return 0;\r\n    })\r\n  }\r\n}\r\n",
+            "sourceCode": "import {\r\n  Component,\r\n  ContentChildren,\r\n  EventEmitter,\r\n  Input,\r\n  Output,\r\n  QueryList,\r\n} from '@angular/core';\r\nimport { Observable } from 'rxjs';\r\nimport { TColumnComponent } from '../t-column/t-column.component';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport enum Direction {\r\n  NONE = 'none',\r\n  ASCENDING = 'asc',\r\n  DESCENDING = 'desc',\r\n}\r\n\r\nexport type SortChangeEvent = {\r\n  columnName: string;\r\n  direction: Direction;\r\n};\r\n\r\n@Component({\r\n  selector: 't-grid',\r\n  standalone: true,\r\n  imports: [CommonModule, TColumnComponent],\r\n  templateUrl: './t-grid.component.html',\r\n  styleUrl: './t-grid.component.scss',\r\n})\r\nexport class TGridComponent<T> {\r\n  @Input() data: T[] | Observable<T[]>;\r\n  @Input() sortable: boolean;\r\n  @Input() pageSize: number | null;\r\n  @Output() sortChange = new EventEmitter<SortChangeEvent>();\r\n  @ContentChildren(TColumnComponent) columnQuery: QueryList<\r\n    TColumnComponent<T>\r\n  >;\r\n\r\n  originalData: T[] = [];\r\n  displayData: T[] = [];\r\n  columns: TColumnComponent<T>[];\r\n  sortProperty?: keyof T;\r\n  direction?: Direction = Direction.NONE;\r\n  currentPage?: number | null;\r\n\r\n  ngOnInit() {\r\n    if (this.data instanceof Observable) {\r\n      this.data.subscribe((data) => {\r\n        this.displayData = [...data];\r\n        this.originalData = [...data];\r\n      });\r\n    } else {\r\n      this.displayData = [...this.data];\r\n      this.originalData = [...this.data];\r\n    }\r\n  }\r\n\r\n  ngAfterContentInit() {\r\n    this.columns = this.columnQuery.map((column) => ({ ...column }));\r\n  }\r\n\r\n  changeDirection() {\r\n    if (this.direction === Direction.NONE) {\r\n      this.direction = Direction.ASCENDING;\r\n    } else if (this.direction === Direction.ASCENDING) {\r\n      this.direction = Direction.DESCENDING;\r\n    } else {\r\n      this.direction = Direction.NONE;\r\n    }\r\n\r\n    this.sortChange.emit({\r\n      columnName: this.sortProperty as string,\r\n      direction: this.direction,\r\n    });\r\n  }\r\n\r\n  sortData() {\r\n    if (this.direction === Direction.NONE) {\r\n      this.displayData = [...this.originalData];\r\n    } else {\r\n      this.displayData.sort((a, b) => {\r\n        const valueA = a[this.sortProperty as keyof T];\r\n        const valueB = b[this.sortProperty as keyof T];\r\n\r\n        if (valueA < valueB)\r\n          return this.direction === Direction.ASCENDING ? -1 : 1;\r\n        if (valueA > valueB)\r\n          return this.direction === Direction.ASCENDING ? 1 : -1;\r\n        return 0;\r\n      });\r\n    }\r\n  }\r\n\r\n  handleColumnClick(column: TColumnComponent<T>) {\r\n    if (!this.sortable || !column.sortable) {\r\n      return;\r\n    }\r\n\r\n    if (this.sortProperty !== column.property) {\r\n      this.sortProperty = column.property;\r\n      this.direction = Direction.NONE;\r\n    }\r\n\r\n    this.changeDirection();\r\n    this.sortData();\r\n  }\r\n}\r\n",
             "styleUrl": "./t-grid.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<table>\r\n  <thead>\r\n    <tr>\r\n      <th *ngFor=\"let column of columns\" (click)=\"sort(column)\">{{ column.name }}</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let item of displayData\">\r\n      <td *ngFor=\"let column of columns\">{{ item[column.property] }}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n"
+            "templateData": "<table>\r\n  <thead>\r\n    <tr>\r\n      <th\r\n        *ngFor=\"let column of columns\"\r\n        [ngClass]=\"{ sortable: sortable && column.sortable }\"\r\n        (click)=\"handleColumnClick(column)\"\r\n      >\r\n        <div>\r\n          <svg\r\n            [ngSwitch]=\"sortProperty === column.property && direction\"\r\n            width=\"15\"\r\n            height=\"15\"\r\n            xmlns=\"http://www.w3.org/2000/svg\"\r\n            viewBox=\"0 0 24 24\"\r\n          >\r\n            <ng-container *ngSwitchCase=\"'asc'\">\r\n              <polyline\r\n                points=\"19 10 12 3 5 10\"\r\n                fill=\"none\"\r\n                stroke=\"white\"\r\n                stroke-width=\"3\"\r\n                stroke-miterlimit=\"10\"\r\n              />\r\n              <line\r\n                x1=\"12\"\r\n                y1=\"3\"\r\n                x2=\"12\"\r\n                y2=\"22\"\r\n                fill=\"none\"\r\n                stroke=\"white\"\r\n                stroke-width=\"3\"\r\n                stroke-miterlimit=\"10\"\r\n              />\r\n            </ng-container>\r\n            <ng-container *ngSwitchCase=\"'desc'\">\r\n              <polyline\r\n                points=\"5 14 12 21 19 14\"\r\n                fill=\"none\"\r\n                stroke=\"white\"\r\n                stroke-width=\"3\"\r\n                stroke-miterlimit=\"10\"\r\n              />\r\n              <line\r\n                x1=\"12\"\r\n                y1=\"21\"\r\n                x2=\"12\"\r\n                y2=\"2\"\r\n                fill=\"none\"\r\n                stroke=\"white\"\r\n                stroke-width=\"3\"\r\n                stroke-miterlimit=\"10\"\r\n              />\r\n            </ng-container>\r\n            <ng-container *ngSwitchCase=\"'none'\"></ng-container>\r\n          </svg>\r\n          <span>\r\n            {{ column.name }}\r\n          </span>\r\n        </div>\r\n      </th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let item of displayData\">\r\n      <td *ngFor=\"let column of columns\">{{ item[column.property] }}</td>\r\n    </tr>\r\n  </tbody>\r\n  <tfoot>\r\n    <span>Total:{{data.length}}</span>\r\n  </tfoot>\r\n</table>\r\n"
         }
     ],
     "modules": [],
@@ -332,11 +387,33 @@
         "functions": [],
         "typealiases": [
             {
+                "name": "ColumnData",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": "src/stories/t-grid/utils.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 187
+            },
+            {
                 "name": "MockUser",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "rawtype": "literal type",
                 "file": "src/stories/t-grid/utils.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 187
+            },
+            {
+                "name": "SortChangeEvent",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": "src/app/components/t-grid/t-grid.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -350,17 +427,20 @@
                     {
                         "name": "NONE",
                         "deprecated": false,
-                        "deprecationMessage": ""
+                        "deprecationMessage": "",
+                        "value": "none"
                     },
                     {
                         "name": "ASCENDING",
                         "deprecated": false,
-                        "deprecationMessage": ""
+                        "deprecationMessage": "",
+                        "value": "asc"
                     },
                     {
                         "name": "DESCENDING",
                         "deprecated": false,
-                        "deprecationMessage": ""
+                        "deprecationMessage": "",
+                        "value": "desc"
                     }
                 ],
                 "ctype": "miscellaneous",
@@ -368,7 +448,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
-                "file": "src/app/components/t-column/t-column.component.ts"
+                "file": "src/app/components/t-grid/t-grid.component.ts"
             }
         ],
         "groupedVariables": {
@@ -409,24 +489,27 @@
         },
         "groupedFunctions": {},
         "groupedEnumerations": {
-            "src/app/components/t-column/t-column.component.ts": [
+            "src/app/components/t-grid/t-grid.component.ts": [
                 {
                     "name": "Direction",
                     "childs": [
                         {
                             "name": "NONE",
                             "deprecated": false,
-                            "deprecationMessage": ""
+                            "deprecationMessage": "",
+                            "value": "none"
                         },
                         {
                             "name": "ASCENDING",
                             "deprecated": false,
-                            "deprecationMessage": ""
+                            "deprecationMessage": "",
+                            "value": "asc"
                         },
                         {
                             "name": "DESCENDING",
                             "deprecated": false,
-                            "deprecationMessage": ""
+                            "deprecationMessage": "",
+                            "value": "desc"
                         }
                     ],
                     "ctype": "miscellaneous",
@@ -434,18 +517,42 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
-                    "file": "src/app/components/t-column/t-column.component.ts"
+                    "file": "src/app/components/t-grid/t-grid.component.ts"
                 }
             ]
         },
         "groupedTypeAliases": {
             "src/stories/t-grid/utils.ts": [
                 {
+                    "name": "ColumnData",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": "src/stories/t-grid/utils.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 187
+                },
+                {
                     "name": "MockUser",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
                     "rawtype": "literal type",
                     "file": "src/stories/t-grid/utils.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 187
+                }
+            ],
+            "src/app/components/t-grid/t-grid.component.ts": [
+                {
+                    "name": "SortChangeEvent",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": "src/app/components/t-grid/t-grid.component.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -493,7 +600,7 @@
                 "linktype": "component",
                 "name": "TGridComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/11",
+                "coverageCount": "0/17",
                 "status": "low"
             },
             {
