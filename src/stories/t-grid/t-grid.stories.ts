@@ -1,5 +1,8 @@
-import { StoryFn, moduleMetadata, type Meta } from '@storybook/angular';
-import { TGridComponent } from '../../app/components/t-grid/t-grid.component';
+import { StoryObj, moduleMetadata, type Meta } from '@storybook/angular';
+import {
+  SortChangeEvent,
+  TGridComponent,
+} from '../../app/components/t-grid/t-grid.component';
 import { MOCK_DATA, MockUser } from './utils';
 import { TColumnComponent } from '../../app/components/t-column/t-column.component';
 import { CommonModule } from '@angular/common';
@@ -12,6 +15,21 @@ const meta: Meta<TGridComponent<MockUser>> = {
       imports: [CommonModule, TColumnComponent],
     }),
   ],
+  render: (args) => ({
+    props: {
+      ...args,
+      logEvent: (e: SortChangeEvent) => console.log(e),
+    },
+    template: `
+      <t-grid [data]="data" [sortable]="sortable" (sortChange)="logEvent($event)">
+        <t-column [name]="'ID'" [property]="'id'" [sortable]="false"></t-column>
+        <t-column [name]="'First Name'" [property]="'firstName'" [sortable]="true"></t-column>
+        <t-column [name]="'Last Name'" [property]="'lastName'" [sortable]="true"></t-column>
+        <t-column [name]="'Points'" [property]="'points'" [sortable]="true"></t-column>
+        <t-column [name]="'Phone Number'" [property]="'phoneNumber'" [sortable]="false"></t-column>
+      </t-grid>
+    `,
+  }),
   tags: ['autodocs'],
   argTypes: {
     data: {
@@ -26,48 +44,20 @@ const meta: Meta<TGridComponent<MockUser>> = {
 };
 
 export default meta;
+type Story = StoryObj<
+  TGridComponent<MockUser> & { x: (e: SortChangeEvent) => void }
+>;
 
-const Template: StoryFn<TGridComponent<MockUser>> = (
-  args: TGridComponent<MockUser>,
-) => ({
-  props: args,
-  template: `
-    <t-grid [data]="data">
-    </t-grid>
-  `,
-});
+export const SortableGrid: Story = {
+  args: {
+    data: MOCK_DATA,
+    sortable: true,
+  },
+};
 
-export const Example = Template.bind({});
-Example.args = {
-  data: MOCK_DATA,
-  columns: [
-    {
-      name: 'ID',
-      property: 'id',
-    },
-    {
-      name: 'First name',
-      property: 'firstName',
-    },
-    {
-      name: 'Last name',
-      property: 'lastName',
-    },
-    {
-      name: 'Points',
-      property: 'points',
-    },
-    {
-      name: 'Phone Number',
-      property: 'phoneNumber',
-    },
-    {
-      name: 'E-mail address',
-      property: 'email',
-    },
-    {
-      name: 'Address',
-      property: 'address',
-    },
-  ],
+export const NonSortableGrid: Story = {
+  args: {
+    data: MOCK_DATA,
+    sortable: false,
+  },
 };

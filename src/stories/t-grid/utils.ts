@@ -10,6 +10,12 @@ export type MockUser = {
   points: number;
 };
 
+export type ColumnData<T> = {
+  name: string;
+  property: keyof T;
+  sortable: boolean;
+};
+
 export const generateMockUser = (): MockUser => ({
   id: faker.string.nanoid(10),
   firstName: faker.person.firstName(),
