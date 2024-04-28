@@ -77,7 +77,7 @@ export class TGridComponent<T> {
     }
 
     this.currentPage = pageNumber;
-
+    this.updateDisplayData();
     this.paginationChange.emit({
       pageSize: this.pageSize,
       currentPage: this.currentPage,
@@ -138,7 +138,6 @@ export class TGridComponent<T> {
 
   updateDisplayData() {
     const pageSize = this.pageSize || this.sortedData.length;
-
     this.displayData = this.sortedData.slice(
       (this.currentPage - 1) * pageSize,
       this.currentPage * pageSize,

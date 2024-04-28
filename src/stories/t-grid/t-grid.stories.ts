@@ -68,7 +68,7 @@ export const NonSortableGrid: Story = {
 export const PaginatedGrid: Story = {
   args: {
     data: MOCK_DATA,
-    sortable: true,
-    pageSize: 5,
+    sortable: false,
+    pageSize: 2,
   },
 };
