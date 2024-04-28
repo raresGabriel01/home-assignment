@@ -77,12 +77,7 @@ export class TGridComponent<T> {
     }
 
     this.currentPage = pageNumber;
-
-    this.displayData = this.sortedData.slice(
-      (this.currentPage - 1) * this.pageSize,
-      this.currentPage * this.pageSize,
-    );
-
+    this.updateDisplayData();
     this.paginationChange.emit({
       pageSize: this.pageSize,
       currentPage: this.currentPage,
@@ -118,11 +113,7 @@ export class TGridComponent<T> {
         const valueA = a[this.sortProperty as keyof T];
         const valueB = b[this.sortProperty as keyof T];
 
-        if (valueA < valueB)
-          return this.direction === Direction.ASCENDING ? -1 : 1;
-        if (valueA > valueB)
-          return this.direction === Direction.ASCENDING ? 1 : -1;
-        return 0;
+        return valueA < valueB ? -1 : 1;
       });
     } else {
       this.sortedData.reverse();
@@ -141,9 +132,15 @@ export class TGridComponent<T> {
 
     this.updateDirection();
     this.sortData();
+    this.updatePageNumber(1);
+    this.updateDisplayData();
+  }
 
-    if (this.pageSize) {
-      this.updatePageNumber(1);
-    }
+  updateDisplayData() {
+    const pageSize = this.pageSize || this.sortedData.length;
+    this.displayData = this.sortedData.slice(
+      (this.currentPage - 1) * pageSize,
+      this.currentPage * pageSize,
+    );
   }
 }
