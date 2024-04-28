@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { concatMap, delay, from, of } from 'rxjs';
 
 export type MockUser = {
   id: string;
@@ -16,7 +17,7 @@ export type ColumnData<T> = {
   sortable: boolean;
 };
 
-export const generateMockUser = (): MockUser => ({
+export const createMockUser = (): MockUser => ({
   id: faker.string.nanoid(10),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
@@ -26,6 +27,15 @@ export const generateMockUser = (): MockUser => ({
   points: faker.number.int({ min: -100, max: 100 }),
 });
 
-export const MOCK_DATA: MockUser[] = faker.helpers.multiple(generateMockUser, {
+export const MOCK_DATA: MockUser[] = faker.helpers.multiple(createMockUser, {
   count: 20,
 });
+
+export const createMockDataObserver = () => {
+  const dataObservable = of(
+    faker.helpers.multiple(createMockUser, { count: 5 }),
+    faker.helpers.multiple(createMockUser, { count: 5 }),
+    faker.helpers.multiple(createMockUser, { count: 5 }),
+  );
+  return dataObservable.pipe(concatMap((item) => of(item).pipe(delay(2500))));
+};

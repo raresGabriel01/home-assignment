@@ -4,10 +4,13 @@
       <tr>
         <th
           *ngFor="let column of columnQuery"
-          [ngClass]="{ sortable: sortable && column.sortable }"
           (click)="handleColumnClick(column)"
         >
-          <div>
+          <button
+            [ngClass]="{ sortable: sortable && column.sortable }"
+            [disabled]="isLoading"
+          >
+            <!--I've had some problems loading SVG files into the html template, so I added it manually, sorry-->
             <svg
               [ngSwitch]="sortProperty === column.property && direction"
               width="15"
@@ -58,26 +61,51 @@
             <span>
               {{ column.name }}
             </span>
-          </div>
+          </button>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of displayData">
-        <td *ngFor="let column of columnQuery">{{ item[column.property] }}</td>
-      </tr>
+      <ng-content
+        *ngIf="
+          isLoading && originalData.length === 0;
+          then thenBlock;
+          else elseBlock
+        "
+      ></ng-content>
+      <ng-template #thenBlock> Loading... </ng-template>
+      <ng-template #elseBlock>
+        <tr *ngFor="let item of displayData">
+          <td *ngFor="let column of columnQuery">
+            {{ item[column.property] }}
+          </td>
+        </tr>
+      </ng-template>
     </tbody>
     <tfoot *ngIf="pageSize !== null">
       <input
         type="number"
         min="1"
         [value]="pageSize"
+        [disabled]="isLoading"
         (change)="handlePageSizeChange($event)"
       />
-      <span>Total:{{ data.length }}</span>
-      <button (click)="updatePageNumber(currentPage - 1)">Left</button>
+      <span
+        >Total:{{ originalData.length }} {{ isLoading && "(loading...)" }}</span
+      >
+      <button
+        [disabled]="isLoading"
+        (click)="updatePageNumber(currentPage - 1)"
+      >
+        Left
+      </button>
       <span>{{ currentPage }}</span>
-      <button (click)="updatePageNumber(currentPage + 1)">Right</button>
+      <button
+        [disabled]="isLoading"
+        (click)="updatePageNumber(currentPage + 1)"
+      >
+        Right
+      </button>
     </tfoot>
   </table>
 </div>
