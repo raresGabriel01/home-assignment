@@ -125,7 +125,7 @@
         },
         {
             "name": "TGridComponent",
-            "id": "component-TGridComponent-7132367a883cd19554ffd514d31813c154a7d44eef507d81eddaf760da8de1f84e87c10ac1a5cfb56a4a508205cb98a174df4c164274a40a0fea37d107f8ba85",
+            "id": "component-TGridComponent-ed7cd1cd5e6a2277369f95a4b8377218a819323304e90387a5a43d42f912133d6f89fcfe75001d1d5fc0708582ac6acfd58d9d6cb52b65d5d57cc0072106fe32",
             "file": "src/app/components/t-grid/t-grid.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -407,13 +407,201 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  Component,\n  ContentChildren,\n  EventEmitter,\n  Input,\n  Output,\n  QueryList,\n} from '@angular/core';\nimport { Observable } from 'rxjs';\nimport { TColumnComponent } from '../t-column/t-column.component';\nimport { CommonModule } from '@angular/common';\n\nexport enum Direction {\n  NONE = 'none',\n  ASCENDING = 'asc',\n  DESCENDING = 'desc',\n}\n\nexport type SortChangeEvent = {\n  columnName: string;\n  direction: Direction;\n};\n\nexport type PaginationChangeEvent = {\n  currentPage: number;\n  pageSize: number | null;\n};\n\n@Component({\n  selector: 't-grid',\n  standalone: true,\n  imports: [CommonModule, TColumnComponent],\n  templateUrl: './t-grid.component.html',\n  styleUrl: './t-grid.component.scss',\n})\nexport class TGridComponent<T> {\n  @Input() data: T[] | Observable<T[]>;\n  @Input() sortable: boolean;\n  @Input() pageSize: number | null;\n  @Output() sortChange = new EventEmitter<SortChangeEvent>();\n  @Output() paginationChange = new EventEmitter<PaginationChangeEvent>();\n  @ContentChildren(TColumnComponent) columnQuery: QueryList<\n    TColumnComponent<T>\n  >;\n\n  originalData: T[] = [];\n  sortedData: T[] = [];\n  displayData: T[] = [];\n  currentPage: number = 1;\n  sortProperty?: keyof T;\n  direction: Direction = Direction.NONE;\n\n  ngOnInit() {\n    if (this.data instanceof Observable) {\n      this.data.subscribe((data) => {\n        this.displayData = data.slice(0, this.pageSize || data.length);\n        this.originalData = [...data];\n        this.sortedData = [...data];\n      });\n    } else {\n      this.displayData = this.data.slice(0, this.pageSize || this.data.length);\n      this.originalData = [...this.data];\n      this.sortedData = [...this.data];\n    }\n  }\n\n  updatePageNumber(pageNumber: number) {\n    if (!this.pageSize) {\n      return;\n    }\n\n    if (\n      pageNumber < 1 ||\n      pageNumber > Math.ceil(this.originalData.length / this.pageSize)\n    ) {\n      return;\n    }\n\n    this.currentPage = pageNumber;\n    this.updateDisplayData();\n    this.paginationChange.emit({\n      pageSize: this.pageSize,\n      currentPage: this.currentPage,\n    });\n  }\n\n  handlePageSizeChange(event: Event) {\n    const input = event.target as HTMLInputElement;\n    this.pageSize = parseInt(input.value);\n    this.updatePageNumber(1);\n  }\n\n  updateDirection() {\n    if (this.direction === Direction.NONE) {\n      this.direction = Direction.ASCENDING;\n    } else if (this.direction === Direction.ASCENDING) {\n      this.direction = Direction.DESCENDING;\n    } else {\n      this.direction = Direction.NONE;\n    }\n\n    this.sortChange.emit({\n      columnName: this.sortProperty as string,\n      direction: this.direction,\n    });\n  }\n\n  sortData() {\n    if (this.direction === Direction.NONE) {\n      this.sortedData = [...this.originalData];\n    } else if (this.direction === Direction.ASCENDING) {\n      this.sortedData.sort((a, b) => {\n        const valueA = a[this.sortProperty as keyof T];\n        const valueB = b[this.sortProperty as keyof T];\n\n        return valueA < valueB ? -1 : 1;\n      });\n    } else {\n      this.sortedData.reverse();\n    }\n  }\n\n  handleColumnClick(column: TColumnComponent<T>) {\n    if (!this.sortable || !column.sortable) {\n      return;\n    }\n\n    if (this.sortProperty !== column.property) {\n      this.sortProperty = column.property;\n      this.direction = Direction.NONE;\n    }\n\n    this.updateDirection();\n    this.sortData();\n    this.updatePageNumber(1);\n    this.updateDisplayData();\n  }\n\n  updateDisplayData() {\n    const pageSize = this.pageSize || this.sortedData.length;\n\n    this.displayData = this.sortedData.slice(\n      (this.currentPage - 1) * pageSize,\n      this.currentPage * pageSize,\n    );\n  }\n}\n",
+            "sourceCode": "import {\r\n  Component,\r\n  ContentChildren,\r\n  EventEmitter,\r\n  Input,\r\n  Output,\r\n  QueryList,\r\n} from '@angular/core';\r\nimport { Observable } from 'rxjs';\r\nimport { TColumnComponent } from '../t-column/t-column.component';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport enum Direction {\r\n  NONE = 'none',\r\n  ASCENDING = 'asc',\r\n  DESCENDING = 'desc',\r\n}\r\n\r\nexport type SortChangeEvent = {\r\n  columnName: string;\r\n  direction: Direction;\r\n};\r\n\r\nexport type PaginationChangeEvent = {\r\n  currentPage: number;\r\n  pageSize: number | null;\r\n};\r\n\r\n@Component({\r\n  selector: 't-grid',\r\n  standalone: true,\r\n  imports: [CommonModule, TColumnComponent],\r\n  templateUrl: './t-grid.component.html',\r\n  styleUrl: './t-grid.component.scss',\r\n})\r\nexport class TGridComponent<T> {\r\n  @Input() data: T[] | Observable<T[]>;\r\n  @Input() sortable: boolean;\r\n  @Input() pageSize: number | null;\r\n  @Output() sortChange = new EventEmitter<SortChangeEvent>();\r\n  @Output() paginationChange = new EventEmitter<PaginationChangeEvent>();\r\n  @ContentChildren(TColumnComponent) columnQuery: QueryList<\r\n    TColumnComponent<T>\r\n  >;\r\n\r\n  originalData: T[] = [];\r\n  sortedData: T[] = [];\r\n  displayData: T[] = [];\r\n  currentPage: number = 1;\r\n  sortProperty?: keyof T;\r\n  direction: Direction = Direction.NONE;\r\n\r\n  ngOnInit() {\r\n    if (this.data instanceof Observable) {\r\n      this.data.subscribe((data) => {\r\n        this.displayData = data.slice(0, this.pageSize || data.length);\r\n        this.originalData = [...data];\r\n        this.sortedData = [...data];\r\n      });\r\n    } else {\r\n      this.displayData = this.data.slice(0, this.pageSize || this.data.length);\r\n      this.originalData = [...this.data];\r\n      this.sortedData = [...this.data];\r\n    }\r\n  }\r\n\r\n  updatePageNumber(pageNumber: number) {\r\n    if (!this.pageSize) {\r\n      return;\r\n    }\r\n\r\n    if (\r\n      pageNumber < 1 ||\r\n      pageNumber > Math.ceil(this.originalData.length / this.pageSize)\r\n    ) {\r\n      return;\r\n    }\r\n\r\n    this.currentPage = pageNumber;\r\n    this.updateDisplayData();\r\n    this.paginationChange.emit({\r\n      pageSize: this.pageSize,\r\n      currentPage: this.currentPage,\r\n    });\r\n  }\r\n\r\n  handlePageSizeChange(event: Event) {\r\n    const input = event.target as HTMLInputElement;\r\n    this.pageSize = parseInt(input.value);\r\n    this.updatePageNumber(1);\r\n  }\r\n\r\n  updateDirection() {\r\n    if (this.direction === Direction.NONE) {\r\n      this.direction = Direction.ASCENDING;\r\n    } else if (this.direction === Direction.ASCENDING) {\r\n      this.direction = Direction.DESCENDING;\r\n    } else {\r\n      this.direction = Direction.NONE;\r\n    }\r\n\r\n    this.sortChange.emit({\r\n      columnName: this.sortProperty as string,\r\n      direction: this.direction,\r\n    });\r\n  }\r\n\r\n  sortData() {\r\n    if (this.direction === Direction.NONE) {\r\n      this.sortedData = [...this.originalData];\r\n    } else if (this.direction === Direction.ASCENDING) {\r\n      this.sortedData.sort((a, b) => {\r\n        const valueA = a[this.sortProperty as keyof T];\r\n        const valueB = b[this.sortProperty as keyof T];\r\n\r\n        return valueA < valueB ? -1 : 1;\r\n      });\r\n    } else {\r\n      this.sortedData.reverse();\r\n    }\r\n  }\r\n\r\n  handleColumnClick(column: TColumnComponent<T>) {\r\n    if (!this.sortable || !column.sortable) {\r\n      return;\r\n    }\r\n\r\n    if (this.sortProperty !== column.property) {\r\n      this.sortProperty = column.property;\r\n      this.direction = Direction.NONE;\r\n    }\r\n\r\n    this.updateDirection();\r\n    this.sortData();\r\n    this.updatePageNumber(1);\r\n    this.updateDisplayData();\r\n  }\r\n\r\n  updateDisplayData() {\r\n    const pageSize = this.pageSize || this.sortedData.length;\r\n    this.displayData = this.sortedData.slice(\r\n      (this.currentPage - 1) * pageSize,\r\n      this.currentPage * pageSize,\r\n    );\r\n  }\r\n}\r\n",
             "styleUrl": "./t-grid.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
             "templateData": "<div class=\"table-wrapper\">\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th\r\n          *ngFor=\"let column of columnQuery\"\r\n          [ngClass]=\"{ sortable: sortable && column.sortable }\"\r\n          (click)=\"handleColumnClick(column)\"\r\n        >\r\n          <div>\r\n            <svg\r\n              [ngSwitch]=\"sortProperty === column.property && direction\"\r\n              width=\"15\"\r\n              height=\"15\"\r\n              xmlns=\"http://www.w3.org/2000/svg\"\r\n              viewBox=\"0 0 24 24\"\r\n            >\r\n              <ng-container *ngSwitchCase=\"'asc'\">\r\n                <polyline\r\n                  points=\"19 10 12 3 5 10\"\r\n                  fill=\"none\"\r\n                  stroke=\"white\"\r\n                  stroke-width=\"3\"\r\n                  stroke-miterlimit=\"10\"\r\n                />\r\n                <line\r\n                  x1=\"12\"\r\n                  y1=\"3\"\r\n                  x2=\"12\"\r\n                  y2=\"22\"\r\n                  fill=\"none\"\r\n                  stroke=\"white\"\r\n                  stroke-width=\"3\"\r\n                  stroke-miterlimit=\"10\"\r\n                />\r\n              </ng-container>\r\n              <ng-container *ngSwitchCase=\"'desc'\">\r\n                <polyline\r\n                  points=\"5 14 12 21 19 14\"\r\n                  fill=\"none\"\r\n                  stroke=\"white\"\r\n                  stroke-width=\"3\"\r\n                  stroke-miterlimit=\"10\"\r\n                />\r\n                <line\r\n                  x1=\"12\"\r\n                  y1=\"21\"\r\n                  x2=\"12\"\r\n                  y2=\"2\"\r\n                  fill=\"none\"\r\n                  stroke=\"white\"\r\n                  stroke-width=\"3\"\r\n                  stroke-miterlimit=\"10\"\r\n                />\r\n              </ng-container>\r\n              <ng-container *ngSwitchCase=\"'none'\"></ng-container>\r\n            </svg>\r\n            <span>\r\n              {{ column.name }}\r\n            </span>\r\n          </div>\r\n        </th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let item of displayData\">\r\n        <td *ngFor=\"let column of columnQuery\">{{ item[column.property] }}</td>\r\n      </tr>\r\n    </tbody>\r\n    <tfoot *ngIf=\"pageSize !== null\">\r\n      <input\r\n        type=\"number\"\r\n        min=\"1\"\r\n        [value]=\"pageSize\"\r\n        (change)=\"handlePageSizeChange($event)\"\r\n      />\r\n      <span>Total:{{ data.length }}</span>\r\n      <button (click)=\"updatePageNumber(currentPage - 1)\">Left</button>\r\n      <span>{{ currentPage }}</span>\r\n      <button (click)=\"updatePageNumber(currentPage + 1)\">Right</button>\r\n    </tfoot>\r\n  </table>\r\n</div>\r\n"
+        },
+        {
+            "name": "TProgressComponent",
+            "id": "component-TProgressComponent-2ef87627eadad6d3dc8611ad5871643d0bc7ec57f4444888fcfd8633b3866771246ab3dadc0706ec6ba87d02b7b62ba35f68ae8063e07cd595c517704b2d974e",
+            "file": "src/app/components/t-progress/t-progress.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "t-progress",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./t-progress.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "color",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 31,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "progress",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 30,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "radius",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 29,
+                    "type": "number",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "complete",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 32,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "margin",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 35
+                },
+                {
+                    "name": "MAXIMUM_PROGRESS",
+                    "defaultValue": "100",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 38,
+                    "modifierKind": [
+                        125,
+                        148
+                    ]
+                },
+                {
+                    "name": "MINIMUM_PROGRESS",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 37,
+                    "modifierKind": [
+                        125,
+                        148
+                    ]
+                },
+                {
+                    "name": "MINIMUM_RADIUS",
+                    "defaultValue": "50",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 36,
+                    "modifierKind": [
+                        125,
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "getPathString",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 64,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 58,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "simpleChanges",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 41,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "simpleChanges",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 54,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport {\r\n  Component,\r\n  EventEmitter,\r\n  Input,\r\n  NO_ERRORS_SCHEMA,\r\n  Output,\r\n  SimpleChanges,\r\n} from '@angular/core';\r\n\r\ntype Point = {\r\n  x: number;\r\n  y: number;\r\n};\r\n\r\nexport const RADIUS_ERROR_MESSAGE = 't-progress radius value is less than 50';\r\nexport const PROGRESS_ERROR_MESSAGE =\r\n  't-progress progress value is outside of the [0, 100] interval';\r\n\r\n@Component({\r\n  selector: 't-progress',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  schemas: [NO_ERRORS_SCHEMA],\r\n  templateUrl: './t-progress.component.html',\r\n  styleUrl: './t-progress.component.scss',\r\n})\r\nexport class TProgressComponent {\r\n  @Input() radius: number;\r\n  @Input() progress: number;\r\n  @Input() color: string;\r\n  @Output() complete = new EventEmitter<void>();\r\n\r\n  // A safety margin proportional to the radius so that the circle stroke does not overflow outside the svg element.\r\n  margin: number;\r\n  public readonly MINIMUM_RADIUS: number = 50;\r\n  public readonly MINIMUM_PROGRESS: number = 0;\r\n  public readonly MAXIMUM_PROGRESS: number = 100;\r\n\r\n  //IMPORTANT NOTE: while running in storybook, the errors will be thrown twice (does not reproduce while running with `ng serve`)\r\n  ngOnChanges(simpleChanges: SimpleChanges) {\r\n    if (simpleChanges['radius'].currentValue < this.MINIMUM_RADIUS) {\r\n      throw new Error(RADIUS_ERROR_MESSAGE);\r\n    }\r\n\r\n    if (\r\n      simpleChanges['progress'].currentValue < this.MINIMUM_PROGRESS ||\r\n      simpleChanges['progress'].currentValue > this.MAXIMUM_PROGRESS\r\n    ) {\r\n      throw new Error(PROGRESS_ERROR_MESSAGE);\r\n    }\r\n  }\r\n\r\n  ngOnInit() {\r\n    this.margin = 0.1 * this.radius;\r\n  }\r\n\r\n  ngAfterViewInit() {\r\n    if (this.progress === this.MAXIMUM_PROGRESS) {\r\n      this.complete.emit();\r\n    }\r\n  }\r\n\r\n  getPathString() {\r\n    const centerPoint: Point = {\r\n      x: this.radius + this.margin,\r\n      y: this.radius + this.margin,\r\n    };\r\n\r\n    // Point at the top of the circle.\r\n    const startPoint: Point = {\r\n      x: this.radius + this.margin,\r\n      y: this.margin,\r\n    };\r\n\r\n    // The angle describing the circle arc - directly proportional to the progress.\r\n    const arcAngle = (2 * Math.PI * this.progress) / 100;\r\n\r\n    // Angle measured against the Ox axis.\r\n    const referenceAngle = Math.PI / 2 - arcAngle;\r\n\r\n    // End point of circle arc.\r\n    const endPoint: Point = {\r\n      x: centerPoint.x + this.radius * Math.cos(referenceAngle),\r\n      y: centerPoint.y - this.radius * Math.sin(referenceAngle),\r\n    };\r\n\r\n    const largeArcFlag = this.progress >= 50 ? 1 : 0;\r\n\r\n    return `M ${startPoint.x}, ${startPoint.y} A ${this.radius}, ${this.radius}, 0 ${largeArcFlag} 1 ${endPoint.x}, ${endPoint.y}`;\r\n  }\r\n}\r\n",
+            "styleUrl": "./t-progress.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<svg\r\n  *ngIf=\"\r\n    radius >= MINIMUM_RADIUS &&\r\n    progress >= MINIMUM_PROGRESS &&\r\n    progress <= MAXIMUM_PROGRESS\r\n  \"\r\n  attr.height=\"{{ (radius + margin) * 2 }}px\"\r\n  attr.width=\"{{ (radius + margin) * 2 }}px\"\r\n  attr.viewBox=\"0 0 {{ (radius + margin) * 2 }} {{ (radius + margin) * 2 }}\"\r\n>\r\n  <div *ngIf=\"progress < 100; then thenBlock; else elseBlock\"></div>\r\n  <ng-template #thenBlock>\r\n    <path\r\n      fill=\"none\"\r\n      attr.stroke=\"{{ color }}\"\r\n      attr.stroke-width=\"{{ 0.1 * radius }}\"\r\n      stroke-linecap=\"round\"\r\n      attr.d=\"{{ getPathString() }}\"\r\n    />\r\n  </ng-template>\r\n  <ng-template #elseBlock>\r\n    <circle\r\n      fill=\"none\"\r\n      attr.stroke=\"{{ color }}\"\r\n      attr.stroke-width=\"{{ 0.1 * radius }}\"\r\n      attr.cx=\"{{ radius + margin }}\"\r\n      attr.cy=\"{{ radius + margin }}\"\r\n      attr.r=\"{{ radius }}\"\r\n    />\r\n  </ng-template>\r\n\r\n  <text\r\n    [ngStyle]=\"{\r\n      'font-size': 0.7 * radius,\r\n      fill: color,\r\n      stroke: color\r\n    }\"\r\n    attr.x=\"{{ radius + margin }}\"\r\n    attr.y=\"{{ radius + margin }}\"\r\n  >\r\n    {{ progress }}%\r\n  </text>\r\n</svg>\r\n"
         }
     ],
     "modules": [],
@@ -437,7 +625,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "(): MockUser => ({\r\n  id: faker.string.nanoid(10),\r\n  firstName: faker.person.firstName(),\r\n  lastName: faker.person.lastName(),\r\n  phoneNumber: faker.phone.imei(),\r\n  email: faker.internet.email(),\r\n  address: faker.location.streetAddress(),\r\n  points: faker.number.int({ min: -100, max: 100 }),\r\n})"
+                "defaultValue": "(): MockUser => ({\n  id: faker.string.nanoid(10),\n  firstName: faker.person.firstName(),\n  lastName: faker.person.lastName(),\n  phoneNumber: faker.phone.imei(),\n  email: faker.internet.email(),\n  address: faker.location.streetAddress(),\n  points: faker.number.int({ min: -100, max: 100 }),\n})"
             },
             {
                 "name": "MOCK_DATA",
@@ -447,7 +635,27 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "MockUser[]",
-                "defaultValue": "faker.helpers.multiple(generateMockUser, {\r\n  count: 20,\r\n})"
+                "defaultValue": "faker.helpers.multiple(generateMockUser, {\n  count: 20,\n})"
+            },
+            {
+                "name": "PROGRESS_ERROR_MESSAGE",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/t-progress/t-progress.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'t-progress progress value is outside of the [0, 100] interval'"
+            },
+            {
+                "name": "RADIUS_ERROR_MESSAGE",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/t-progress/t-progress.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'t-progress radius value is less than 50'"
             }
         ],
         "functions": [],
@@ -480,6 +688,17 @@
                 "subtype": "typealias",
                 "rawtype": "literal type",
                 "file": "src/app/components/t-grid/t-grid.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 187
+            },
+            {
+                "name": "Point",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": "src/app/components/t-progress/t-progress.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -550,7 +769,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "(): MockUser => ({\r\n  id: faker.string.nanoid(10),\r\n  firstName: faker.person.firstName(),\r\n  lastName: faker.person.lastName(),\r\n  phoneNumber: faker.phone.imei(),\r\n  email: faker.internet.email(),\r\n  address: faker.location.streetAddress(),\r\n  points: faker.number.int({ min: -100, max: 100 }),\r\n})"
+                    "defaultValue": "(): MockUser => ({\n  id: faker.string.nanoid(10),\n  firstName: faker.person.firstName(),\n  lastName: faker.person.lastName(),\n  phoneNumber: faker.phone.imei(),\n  email: faker.internet.email(),\n  address: faker.location.streetAddress(),\n  points: faker.number.int({ min: -100, max: 100 }),\n})"
                 },
                 {
                     "name": "MOCK_DATA",
@@ -560,7 +779,29 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "MockUser[]",
-                    "defaultValue": "faker.helpers.multiple(generateMockUser, {\r\n  count: 20,\r\n})"
+                    "defaultValue": "faker.helpers.multiple(generateMockUser, {\n  count: 20,\n})"
+                }
+            ],
+            "src/app/components/t-progress/t-progress.component.ts": [
+                {
+                    "name": "PROGRESS_ERROR_MESSAGE",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/t-progress/t-progress.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'t-progress progress value is outside of the [0, 100] interval'"
+                },
+                {
+                    "name": "RADIUS_ERROR_MESSAGE",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/t-progress/t-progress.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'t-progress radius value is less than 50'"
                 }
             ]
         },
@@ -646,6 +887,19 @@
                     "description": "",
                     "kind": 187
                 }
+            ],
+            "src/app/components/t-progress/t-progress.component.ts": [
+                {
+                    "name": "Point",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": "src/app/components/t-progress/t-progress.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 187
+                }
             ]
         }
     },
@@ -689,6 +943,35 @@
                 "name": "TGridComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/20",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/t-progress/t-progress.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TProgressComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/13",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/t-progress/t-progress.component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PROGRESS_ERROR_MESSAGE",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/t-progress/t-progress.component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "RADIUS_ERROR_MESSAGE",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {

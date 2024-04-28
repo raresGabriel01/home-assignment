@@ -4,9 +4,26 @@ import {
   SortChangeEvent,
   TGridComponent,
 } from '../../app/components/t-grid/t-grid.component';
-import { MOCK_DATA, MockUser } from './utils';
+import { MOCK_DATA, MockUser, createMockDataObserver } from './utils';
 import { TColumnComponent } from '../../app/components/t-column/t-column.component';
 import { CommonModule } from '@angular/common';
+import { Observable, Observer, from, scan } from 'rxjs';
+
+const COMMON_TEMPLATE = `
+<t-grid 
+  [data]="data" 
+  [sortable]="sortable" 
+  [pageSize]="pageSize" 
+  (sortChange)="handleSortChange($event)" 
+  (paginationChange)="handlePaginationChange($event)"
+>
+  <t-column [name]="'ID'" [property]="'id'" [sortable]="false"></t-column>
+  <t-column [name]="'First Name'" [property]="'firstName'" [sortable]="true"></t-column>
+  <t-column [name]="'Last Name'" [property]="'lastName'" [sortable]="true"></t-column>
+  <t-column [name]="'Points'" [property]="'points'" [sortable]="true"></t-column>
+  <t-column [name]="'Phone Number'" [property]="'phoneNumber'" [sortable]="false"></t-column>
+</t-grid>
+`;
 
 const meta: Meta<TGridComponent<MockUser>> = {
   title: 'Assignment/t-grid',
@@ -19,17 +36,8 @@ const meta: Meta<TGridComponent<MockUser>> = {
   render: (args) => ({
     props: {
       ...args,
-      logEvent: (e: SortChangeEvent | PaginationChangeEvent) => console.log(e),
     },
-    template: `
-      <t-grid [data]="data" [sortable]="sortable" [pageSize]="pageSize" (sortChange)="logEvent($event)" (paginationChange)="logEvent($event)">
-        <t-column [name]="'ID'" [property]="'id'" [sortable]="false"></t-column>
-        <t-column [name]="'First Name'" [property]="'firstName'" [sortable]="true"></t-column>
-        <t-column [name]="'Last Name'" [property]="'lastName'" [sortable]="true"></t-column>
-        <t-column [name]="'Points'" [property]="'points'" [sortable]="true"></t-column>
-        <t-column [name]="'Phone Number'" [property]="'phoneNumber'" [sortable]="false"></t-column>
-      </t-grid>
-    `,
+    template: COMMON_TEMPLATE,
   }),
   tags: ['autodocs'],
   argTypes: {
@@ -69,4 +77,20 @@ export const PaginatedGrid: Story = {
     sortable: true,
     pageSize: 5,
   },
+};
+
+export const PaginatedAsyncLoading: Story = {
+  args: {
+    data: createMockDataObserver(),
+    sortable: true,
+    pageSize: 5,
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      handlePaginationChange: (event: PaginationChangeEvent) =>
+        console.log(event),
+    },
+    template: COMMON_TEMPLATE,
+  }),
 };

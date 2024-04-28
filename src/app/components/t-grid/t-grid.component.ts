@@ -49,13 +49,28 @@ export class TGridComponent<T> {
   currentPage: number = 1;
   sortProperty?: keyof T;
   direction: Direction = Direction.NONE;
+  isLoading: boolean = false;
 
   ngOnInit() {
     if (this.data instanceof Observable) {
-      this.data.subscribe((data) => {
-        this.displayData = data.slice(0, this.pageSize || data.length);
-        this.originalData = [...data];
-        this.sortedData = [...data];
+      this.isLoading = true;
+      this.data.subscribe({
+        next: (nextData) => {
+          this.originalData = [...this.originalData, ...nextData];
+          // The reason that I am doing it here instead of on the `complete` method
+          // Is that maybe the pageSize is large/null and it need to constantly update the displayedData
+          this.displayData = this.originalData.slice(
+            0,
+            this.pageSize || this.originalData.length,
+          );
+        },
+        error: (error) => {
+          console.error(error);
+        },
+        complete: () => {
+          this.isLoading = false;
+          this.sortedData = [...this.originalData];
+        },
       });
     } else {
       this.displayData = this.data.slice(0, this.pageSize || this.data.length);
