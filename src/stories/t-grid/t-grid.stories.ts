@@ -45,9 +45,7 @@ const meta: Meta<TGridComponent<MockUser>> = {
 };
 
 export default meta;
-type Story = StoryObj<
-  TGridComponent<MockUser> & { x: (e: SortChangeEvent) => void }
->;
+type Story = StoryObj<TGridComponent<MockUser>>;
 
 export const SortableGrid: Story = {
   args: {
