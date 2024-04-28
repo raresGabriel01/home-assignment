@@ -69,6 +69,6 @@ export const PaginatedGrid: Story = {
   args: {
     data: MOCK_DATA,
     sortable: false,
-    pageSize: 2,
+    pageSize: 5,
   },
 };

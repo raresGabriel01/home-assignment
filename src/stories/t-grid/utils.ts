@@ -27,5 +27,5 @@ export const generateMockUser = (): MockUser => ({
 });
 
 export const MOCK_DATA: MockUser[] = faker.helpers.multiple(generateMockUser, {
-  count: 3,
+  count: 20,
 });
