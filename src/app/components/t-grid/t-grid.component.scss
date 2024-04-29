@@ -16,9 +16,8 @@ table {
   thead {
     background-color: $main-color;
     color: white;
-    position: sticky;
-    top: 0;
     height: 42px;
+    position: sticky;
   }
 
   td,
@@ -44,6 +43,7 @@ table {
       align-items: center;
       border: none;
       color: white;
+      background-color: $main-color;
       font-weight: bold;
     }
 
@@ -73,30 +73,24 @@ table {
     tr {
       height: 32px;
       overflow: hidden;
-    }
-
-    tr:last-child {
       td {
-        border-bottom: none;
+        overflow: hidden;
+        white-space: nowrap;
+        div {
+          overflow: hidden;
+        }
       }
     }
   }
 }
 
-.table-wrapper {
-  height: 300px;
-  overflow: hidden;
-  overflow-y: scroll;
-  position: relative;
-}
-
 .control-wrapper {
-  width: 100%;
+  width: calc(100% - 5px);
   display: flex;
   justify-content: space-between;
   padding: 12px 8px;
   align-items: center;
-
+  background-color: red;
   position: sticky;
   bottom: 0;
   background-color: white;
@@ -148,4 +142,17 @@ table {
   100% {
     transform: rotate(360deg);
   }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-button {
+  display: none;
+}
+::-webkit-scrollbar-track-piece {
+  display: none;
+}
+::-webkit-scrollbar-thumb {
+  background: lightgray;
 }
