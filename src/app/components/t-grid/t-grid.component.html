@@ -73,39 +73,49 @@
           else elseBlock
         "
       ></ng-content>
-      <ng-template #thenBlock> Loading... </ng-template>
+      <ng-template #thenBlock> <div class="loader"></div> </ng-template>
       <ng-template #elseBlock>
         <tr *ngFor="let item of displayData">
           <td *ngFor="let column of columnQuery">
-            {{ item[column.property] }}
+            <div>
+              {{ item[column.property] }}
+            </div>
           </td>
         </tr>
       </ng-template>
     </tbody>
-    <tfoot *ngIf="pageSize !== null">
+  </table>
+  <div class="control-wrapper" *ngIf="pageSize !== null">
+    <div class="total">
+      <span>
+        Total: {{ originalData.length }} {{ isLoading ? "(loading...)" : "" }}
+      </span>
+    </div>
+    <div class="page-number">
+      <button
+        [disabled]="isLoading"
+        (click)="updatePageNumber(currentPage - 1)"
+      >
+        Back
+      </button>
+      <span> Page: {{ currentPage }} </span>
+      <button
+        [disabled]="isLoading"
+        (click)="updatePageNumber(currentPage + 1)"
+      >
+        Next
+      </button>
+    </div>
+    <div class="page-size">
+      <label for="pageSize"> Page size: </label>
       <input
+        name="pageSize"
         type="number"
         min="1"
         [value]="pageSize"
         [disabled]="isLoading"
         (change)="handlePageSizeChange($event)"
       />
-      <span
-        >Total:{{ originalData.length }} {{ isLoading && "(loading...)" }}</span
-      >
-      <button
-        [disabled]="isLoading"
-        (click)="updatePageNumber(currentPage - 1)"
-      >
-        Left
-      </button>
-      <span>{{ currentPage }}</span>
-      <button
-        [disabled]="isLoading"
-        (click)="updatePageNumber(currentPage + 1)"
-      >
-        Right
-      </button>
-    </tfoot>
-  </table>
+    </div>
+  </div>
 </div>

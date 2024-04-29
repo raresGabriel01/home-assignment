@@ -1,13 +1,11 @@
 import { StoryObj, moduleMetadata, type Meta } from '@storybook/angular';
 import {
   PaginationChangeEvent,
-  SortChangeEvent,
   TGridComponent,
 } from '../../app/components/t-grid/t-grid.component';
-import { MOCK_DATA, MockUser, createMockDataObserver } from './utils';
+import { createMockData, MockUser, createMockDataObserver } from './utils';
 import { TColumnComponent } from '../../app/components/t-column/t-column.component';
 import { CommonModule } from '@angular/common';
-import { Observable, Observer, from, scan } from 'rxjs';
 
 const COMMON_TEMPLATE = `
 <t-grid 
@@ -57,7 +55,7 @@ type Story = StoryObj<TGridComponent<MockUser>>;
 
 export const SortableGrid: Story = {
   args: {
-    data: MOCK_DATA,
+    data: createMockData(30),
     sortable: true,
     pageSize: null,
   },
@@ -65,7 +63,7 @@ export const SortableGrid: Story = {
 
 export const NonSortableGrid: Story = {
   args: {
-    data: MOCK_DATA,
+    data: createMockData(30),
     sortable: false,
     pageSize: null,
   },
@@ -73,17 +71,17 @@ export const NonSortableGrid: Story = {
 
 export const PaginatedGrid: Story = {
   args: {
-    data: MOCK_DATA,
+    data: createMockData(30),
     sortable: true,
-    pageSize: 5,
+    pageSize: 8,
   },
 };
 
 export const PaginatedAsyncLoading: Story = {
   args: {
-    data: createMockDataObserver(),
+    data: createMockDataObserver(20),
     sortable: true,
-    pageSize: 5,
+    pageSize: 10,
   },
   render: (args) => ({
     props: {

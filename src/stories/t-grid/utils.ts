@@ -27,15 +27,16 @@ export const createMockUser = (): MockUser => ({
   points: faker.number.int({ min: -100, max: 100 }),
 });
 
-export const MOCK_DATA: MockUser[] = faker.helpers.multiple(createMockUser, {
-  count: 20,
-});
+export const createMockData = (count: number) =>
+  faker.helpers.multiple(createMockUser, {
+    count,
+  });
 
-export const createMockDataObserver = () => {
+export const createMockDataObserver = (count: number) => {
   const dataObservable = of(
-    faker.helpers.multiple(createMockUser, { count: 5 }),
-    faker.helpers.multiple(createMockUser, { count: 5 }),
-    faker.helpers.multiple(createMockUser, { count: 5 }),
+    faker.helpers.multiple(createMockUser, { count }),
+    faker.helpers.multiple(createMockUser, { count }),
+    faker.helpers.multiple(createMockUser, { count }),
   );
   return dataObservable.pipe(concatMap((item) => of(item).pipe(delay(2500))));
 };
