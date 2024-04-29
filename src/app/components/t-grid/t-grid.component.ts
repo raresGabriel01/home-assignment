@@ -1,4 +1,6 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
   EventEmitter,
@@ -32,6 +34,7 @@ export type PaginationChangeEvent = {
   imports: [CommonModule, TColumnComponent],
   templateUrl: './t-grid.component.html',
   styleUrl: './t-grid.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TGridComponent<T> {
   @Input() data: T[] | Observable<T[]>;
@@ -51,6 +54,8 @@ export class TGridComponent<T> {
   direction: Direction = Direction.NONE;
   isLoading: boolean = false;
 
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+
   ngOnInit() {
     if (this.data instanceof Observable) {
       this.isLoading = true;
@@ -63,6 +68,7 @@ export class TGridComponent<T> {
             0,
             this.pageSize || this.originalData.length,
           );
+          this.changeDetectorRef.detectChanges();
         },
         error: (error) => {
           console.error(error);
@@ -70,6 +76,7 @@ export class TGridComponent<T> {
         complete: () => {
           this.isLoading = false;
           this.sortedData = [...this.originalData];
+          this.changeDetectorRef.detectChanges();
         },
       });
     } else {
