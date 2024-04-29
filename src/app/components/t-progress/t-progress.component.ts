@@ -44,9 +44,7 @@ export class TProgressComponent {
       Math.min(this.MAXIMUM_PROGRESS, this.progress),
     );
     this.margin = 0.1 * this.renderRadius;
-  }
 
-  ngAfterViewInit() {
     if (this.renderProgress === this.MAXIMUM_PROGRESS) {
       this.complete.emit();
     }
