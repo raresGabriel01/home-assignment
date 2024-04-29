@@ -60,8 +60,6 @@ describe('TProgressComponent', () => {
 
     fixture.detectChanges();
     component.ngOnChanges();
-    component.ngAfterViewInit();
-
     expect(completeSpy).toHaveBeenCalledTimes(1);
   });
 });
