@@ -24,7 +24,7 @@ describe('TProgressComponent', () => {
     component.radius = 10;
     component.progress = 20;
     fixture.detectChanges();
-    component.ngOnInit();
+    component.ngOnChanges();
     expect(component.renderRadius).toBe(50);
   });
 
@@ -32,7 +32,7 @@ describe('TProgressComponent', () => {
     component.radius = 50;
     component.progress = -50;
     fixture.detectChanges();
-    component.ngOnInit();
+    component.ngOnChanges();
     expect(component.renderProgress).toBe(0);
   });
 
@@ -40,7 +40,7 @@ describe('TProgressComponent', () => {
     component.radius = 50;
     component.progress = 120;
     fixture.detectChanges();
-    component.ngOnInit();
+    component.ngOnChanges();
     expect(component.renderProgress).toBe(100);
   });
 
@@ -48,7 +48,7 @@ describe('TProgressComponent', () => {
     component.radius = 100;
     component.progress = 50;
     fixture.detectChanges();
-    component.ngOnInit();
+    component.ngOnChanges();
     const pathString = component.getPathString();
     expect(pathString).toBe('M 110, 10 A 100, 100, 0 1 1 110, 210');
   });
@@ -59,7 +59,7 @@ describe('TProgressComponent', () => {
     const completeSpy = spyOn(component.complete, 'emit');
 
     fixture.detectChanges();
-    component.ngOnInit();
+    component.ngOnChanges();
     component.ngAfterViewInit();
 
     expect(completeSpy).toHaveBeenCalledTimes(1);

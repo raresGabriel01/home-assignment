@@ -125,7 +125,7 @@
         },
         {
             "name": "TGridComponent",
-            "id": "component-TGridComponent-3bd2aa8d9bf05b00143ed41b06ebf224f47b68ecc1e23e6611cbb41eebc3179a2b4af4765da17443b4532764e881b4293e4c0764e64d8150c61bce261558ec8d",
+            "id": "component-TGridComponent-1cefcb408c407b9020a2e0b669ec00ce028cd6c150f547974e2bb7caf430025db7c833bfd3ca8c92cc1d3720ec575041383e620668d3708aaf820dc4aeda7d15",
             "file": "src/app/components/t-grid/t-grid.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -146,7 +146,7 @@
                     "name": "data",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 42,
+                    "line": 45,
                     "type": "T[] | Observable<T[]>",
                     "decorators": []
                 },
@@ -154,7 +154,7 @@
                     "name": "pageSize",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 47,
                     "type": "number | null",
                     "decorators": []
                 },
@@ -162,7 +162,7 @@
                     "name": "sortable",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 46,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -173,7 +173,7 @@
                     "defaultValue": "new EventEmitter<PaginationChangeEvent>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 49,
                     "type": "EventEmitter"
                 },
                 {
@@ -181,7 +181,7 @@
                     "defaultValue": "new EventEmitter<SortChangeEvent>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 45,
+                    "line": 48,
                     "type": "EventEmitter"
                 }
             ],
@@ -193,7 +193,7 @@
                     "type": "QueryList<TColumnComponent<T>>",
                     "optional": false,
                     "description": "",
-                    "line": 48,
+                    "line": 51,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -212,7 +212,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 57
+                    "line": 60
                 },
                 {
                     "name": "direction",
@@ -222,7 +222,7 @@
                     "type": "Direction",
                     "optional": false,
                     "description": "",
-                    "line": 59
+                    "line": 62
                 },
                 {
                     "name": "displayData",
@@ -232,7 +232,7 @@
                     "type": "T[]",
                     "optional": false,
                     "description": "",
-                    "line": 56
+                    "line": 59
                 },
                 {
                     "name": "isLoading",
@@ -242,7 +242,7 @@
                     "type": "boolean",
                     "optional": false,
                     "description": "",
-                    "line": 60
+                    "line": 63
                 },
                 {
                     "name": "originalData",
@@ -252,7 +252,7 @@
                     "type": "T[]",
                     "optional": false,
                     "description": "",
-                    "line": 54
+                    "line": 57
                 },
                 {
                     "name": "sortedData",
@@ -262,7 +262,7 @@
                     "type": "T[]",
                     "optional": false,
                     "description": "",
-                    "line": 55
+                    "line": 58
                 },
                 {
                     "name": "sortProperty",
@@ -271,7 +271,7 @@
                     "type": "",
                     "optional": true,
                     "description": "",
-                    "line": 58
+                    "line": 61
                 },
                 {
                     "name": "viewPort",
@@ -280,7 +280,7 @@
                     "type": "CdkVirtualScrollViewport",
                     "optional": false,
                     "description": "",
-                    "line": 52,
+                    "line": 55,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -300,7 +300,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 94,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -317,13 +317,41 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 158,
+                    "line": 169,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
                             "name": "column",
                             "type": "TColumnComponent<T>",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "handlePageChangeButtonClick",
+                    "args": [
+                        {
+                            "name": "step",
+                            "type": "\"1\" | ",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 185,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "step",
+                            "type": "\"1\" | ",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -345,7 +373,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 122,
+                    "line": 132,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -366,7 +394,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 64,
+                    "line": 67,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -376,7 +404,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 143,
+                    "line": 154,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -386,7 +414,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 128,
+                    "line": 139,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -396,16 +424,22 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 174,
+                    "line": 193,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
                 {
-                    "name": "updatePageNumber",
+                    "name": "updatePage",
                     "args": [
                         {
                             "name": "pageNumber",
                             "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "pageSize",
+                            "type": "number | null",
                             "deprecated": false,
                             "deprecationMessage": ""
                         }
@@ -413,13 +447,22 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 102,
+                    "line": 105,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
                             "name": "pageNumber",
                             "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "pageSize",
+                            "type": "number | null",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -451,7 +494,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  ChangeDetectorRef,\r\n  Component,\r\n  ContentChildren,\r\n  EventEmitter,\r\n  Input,\r\n  Output,\r\n  QueryList,\r\n  ViewChild,\r\n} from '@angular/core';\r\nimport { Observable } from 'rxjs';\r\nimport { TColumnComponent } from '../t-column/t-column.component';\r\nimport { CommonModule } from '@angular/common';\r\nimport {CdkVirtualScrollViewport, ScrollingModule} from '@angular/cdk/scrolling';\r\n\r\nexport enum Direction {\r\n  NONE = 'none',\r\n  ASCENDING = 'asc',\r\n  DESCENDING = 'desc',\r\n}\r\n\r\nexport type SortChangeEvent = {\r\n  columnName: string;\r\n  direction: Direction;\r\n};\r\n\r\nexport type PaginationChangeEvent = {\r\n  currentPage: number;\r\n  pageSize: number | null;\r\n};\r\n\r\n@Component({\r\n  selector: 't-grid',\r\n  standalone: true,\r\n  imports: [CommonModule, TColumnComponent, ScrollingModule],\r\n  templateUrl: './t-grid.component.html',\r\n  styleUrl: './t-grid.component.scss',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class TGridComponent<T> {\r\n  @Input() data: T[] | Observable<T[]>;\r\n  @Input() sortable: boolean;\r\n  @Input() pageSize: number | null;\r\n  @Output() sortChange = new EventEmitter<SortChangeEvent>();\r\n  @Output() paginationChange = new EventEmitter<PaginationChangeEvent>();\r\n\r\n  @ContentChildren(TColumnComponent) columnQuery: QueryList<\r\n    TColumnComponent<T>\r\n  >;\r\n  @ViewChild(CdkVirtualScrollViewport, {static: false})\r\n  public viewPort: CdkVirtualScrollViewport;\r\n\r\n  originalData: T[] = [];\r\n  sortedData: T[] = [];\r\n  displayData: T[] = [];\r\n  currentPage: number = 1;\r\n  sortProperty?: keyof T;\r\n  direction: Direction = Direction.NONE;\r\n  isLoading: boolean = false;\r\n\r\n  constructor(private changeDetectorRef: ChangeDetectorRef) {}\r\n\r\n  ngOnInit() {\r\n    if (this.data instanceof Observable) {\r\n      this.isLoading = true;\r\n      this.data.subscribe({\r\n        next: (nextData) => {\r\n          this.originalData = [...this.originalData, ...nextData];\r\n          // The reason that I am doing it here instead of on the `complete` method\r\n          // Is that maybe the pageSize is large/null and it need to constantly update the displayedData\r\n          this.displayData = this.originalData.slice(\r\n            0,\r\n            this.pageSize || this.originalData.length,\r\n          );\r\n          this.changeDetectorRef.detectChanges();\r\n        },\r\n        error: (error) => {\r\n          console.error(error);\r\n        },\r\n        complete: () => {\r\n          this.isLoading = false;\r\n          this.sortedData = [...this.originalData];\r\n          this.changeDetectorRef.detectChanges();\r\n        },\r\n      });\r\n    } else {\r\n      this.displayData = this.data.slice(0, this.pageSize || this.data.length);\r\n      this.originalData = [...this.data];\r\n      this.sortedData = [...this.data];\r\n    }\r\n  }\r\n\r\n  getTableHeaderTop() {\r\n    if (!this.viewPort || !this.viewPort[\"_renderedContentOffset\"]) {\r\n      return \"-2px\";\r\n    }\r\n    let offset = this.viewPort[\"_renderedContentOffset\"];\r\n    return `-${offset + 2}px`;\r\n  }\r\n\r\n  updatePageNumber(pageNumber: number) {\r\n    if (!this.pageSize) {\r\n      return;\r\n    }\r\n\r\n    if (\r\n      pageNumber < 1 ||\r\n      pageNumber > Math.ceil(this.originalData.length / this.pageSize)\r\n    ) {\r\n      return;\r\n    }\r\n\r\n    this.currentPage = pageNumber;\r\n    this.updateDisplayData();\r\n    this.paginationChange.emit({\r\n      pageSize: this.pageSize,\r\n      currentPage: this.currentPage,\r\n    });\r\n  }\r\n\r\n  handlePageSizeChange(event: Event) {\r\n    const input = event.target as HTMLInputElement;\r\n    this.pageSize = parseInt(input.value);\r\n    this.updatePageNumber(1);\r\n  }\r\n\r\n  updateDirection() {\r\n    if (this.direction === Direction.NONE) {\r\n      this.direction = Direction.ASCENDING;\r\n    } else if (this.direction === Direction.ASCENDING) {\r\n      this.direction = Direction.DESCENDING;\r\n    } else {\r\n      this.direction = Direction.NONE;\r\n    }\r\n\r\n    this.sortChange.emit({\r\n      columnName: this.sortProperty as string,\r\n      direction: this.direction,\r\n    });\r\n  }\r\n\r\n  sortData() {\r\n    if (this.direction === Direction.NONE) {\r\n      this.sortedData = [...this.originalData];\r\n    } else if (this.direction === Direction.ASCENDING) {\r\n      this.sortedData.sort((a, b) => {\r\n        const valueA = a[this.sortProperty as keyof T];\r\n        const valueB = b[this.sortProperty as keyof T];\r\n\r\n        return valueA < valueB ? -1 : 1;\r\n      });\r\n    } else {\r\n      this.sortedData.reverse();\r\n    }\r\n  }\r\n\r\n  handleColumnClick(column: TColumnComponent<T>) {\r\n    if (!this.sortable || !column.sortable) {\r\n      return;\r\n    }\r\n\r\n    if (this.sortProperty !== column.property) {\r\n      this.sortProperty = column.property;\r\n      this.direction = Direction.NONE;\r\n    }\r\n\r\n    this.updateDirection();\r\n    this.sortData();\r\n    this.updatePageNumber(1);\r\n    this.updateDisplayData();\r\n  }\r\n\r\n  updateDisplayData() {\r\n    const pageSize = this.pageSize || this.sortedData.length;\r\n    this.displayData = this.sortedData.slice(\r\n      (this.currentPage - 1) * pageSize,\r\n      this.currentPage * pageSize,\r\n    );\r\n  }\r\n}\r\n",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  ChangeDetectorRef,\r\n  Component,\r\n  ContentChildren,\r\n  EventEmitter,\r\n  Input,\r\n  Output,\r\n  QueryList,\r\n  ViewChild,\r\n} from '@angular/core';\r\nimport { Observable } from 'rxjs';\r\nimport { TColumnComponent } from '../t-column/t-column.component';\r\nimport { CommonModule } from '@angular/common';\r\nimport {\r\n  CdkVirtualScrollViewport,\r\n  ScrollingModule,\r\n} from '@angular/cdk/scrolling';\r\n\r\nexport enum Direction {\r\n  NONE = 'none',\r\n  ASCENDING = 'asc',\r\n  DESCENDING = 'desc',\r\n}\r\n\r\nexport type SortChangeEvent = {\r\n  columnName: string;\r\n  direction: Direction;\r\n};\r\n\r\nexport type PaginationChangeEvent = {\r\n  currentPage: number;\r\n  pageSize: number | null;\r\n};\r\n\r\n@Component({\r\n  selector: 't-grid',\r\n  standalone: true,\r\n  imports: [CommonModule, TColumnComponent, ScrollingModule],\r\n  templateUrl: './t-grid.component.html',\r\n  styleUrl: './t-grid.component.scss',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class TGridComponent<T> {\r\n  @Input() data: T[] | Observable<T[]>;\r\n  @Input() sortable: boolean;\r\n  @Input() pageSize: number | null;\r\n  @Output() sortChange = new EventEmitter<SortChangeEvent>();\r\n  @Output() paginationChange = new EventEmitter<PaginationChangeEvent>();\r\n\r\n  @ContentChildren(TColumnComponent) columnQuery: QueryList<\r\n    TColumnComponent<T>\r\n  >;\r\n  @ViewChild(CdkVirtualScrollViewport, { static: false })\r\n  public viewPort: CdkVirtualScrollViewport;\r\n\r\n  originalData: T[] = [];\r\n  sortedData: T[] = [];\r\n  displayData: T[] = [];\r\n  currentPage: number = 1;\r\n  sortProperty?: keyof T;\r\n  direction: Direction = Direction.NONE;\r\n  isLoading: boolean = false;\r\n\r\n  constructor(private changeDetectorRef: ChangeDetectorRef) {}\r\n\r\n  ngOnInit() {\r\n    if (this.data instanceof Observable) {\r\n      this.isLoading = true;\r\n      this.data.subscribe({\r\n        next: (nextData) => {\r\n          this.originalData = [...this.originalData, ...nextData];\r\n          // The reason that I am doing it here instead of on the `complete` method\r\n          // Is that maybe the pageSize is large/null and it need to constantly update the displayedData\r\n          this.displayData = this.originalData.slice(\r\n            0,\r\n            this.pageSize || this.originalData.length,\r\n          );\r\n          this.changeDetectorRef.detectChanges();\r\n        },\r\n        error: (error) => {\r\n          console.error(error);\r\n        },\r\n        complete: () => {\r\n          this.isLoading = false;\r\n          this.sortedData = [...this.originalData];\r\n          this.changeDetectorRef.detectChanges();\r\n        },\r\n      });\r\n    } else {\r\n      this.displayData = this.data.slice(0, this.pageSize || this.data.length);\r\n      this.originalData = [...this.data];\r\n      this.sortedData = [...this.data];\r\n    }\r\n  }\r\n\r\n  getTableHeaderTop() {\r\n    if (!this.viewPort || !this.viewPort['_renderedContentOffset']) {\r\n      return '-2px';\r\n    }\r\n    let offset = this.viewPort['_renderedContentOffset'];\r\n    return `-${offset + 2}px`;\r\n  }\r\n\r\n  updatePage(pageNumber: number, pageSize: number | null) {\r\n    if (!this.pageSize) {\r\n      return;\r\n    }\r\n\r\n    if (\r\n      pageNumber < 1 ||\r\n      pageNumber > Math.ceil(this.originalData.length / this.pageSize) ||\r\n      pageSize === null ||\r\n      pageSize < 1\r\n    ) {\r\n      return;\r\n    }\r\n\r\n    // Early exit here to avoid events emitted in case nothing changes.\r\n    if (this.currentPage === pageNumber && this.pageSize === pageSize) {\r\n      return;\r\n    }\r\n\r\n    this.currentPage = pageNumber;\r\n    this.pageSize = pageSize;\r\n    this.paginationChange.emit({\r\n      pageSize: this.pageSize,\r\n      currentPage: this.currentPage,\r\n    });\r\n  }\r\n\r\n  handlePageSizeChange(event: Event) {\r\n    const input = event.target as HTMLInputElement;\r\n    const newPageSize = parseInt(input.value);\r\n    this.updatePage(1, newPageSize);\r\n    this.updateDisplayData();\r\n  }\r\n\r\n  updateDirection() {\r\n    if (this.direction === Direction.NONE) {\r\n      this.direction = Direction.ASCENDING;\r\n    } else if (this.direction === Direction.ASCENDING) {\r\n      this.direction = Direction.DESCENDING;\r\n    } else {\r\n      this.direction = Direction.NONE;\r\n    }\r\n\r\n    this.sortChange.emit({\r\n      columnName: this.sortProperty as string,\r\n      direction: this.direction,\r\n    });\r\n  }\r\n\r\n  sortData() {\r\n    if (this.direction === Direction.NONE) {\r\n      this.sortedData = [...this.originalData];\r\n    } else if (this.direction === Direction.ASCENDING) {\r\n      this.sortedData.sort((a, b) => {\r\n        const valueA = a[this.sortProperty as keyof T];\r\n        const valueB = b[this.sortProperty as keyof T];\r\n\r\n        return valueA < valueB ? -1 : 1;\r\n      });\r\n    } else {\r\n      this.sortedData.reverse();\r\n    }\r\n  }\r\n\r\n  handleColumnClick(column: TColumnComponent<T>) {\r\n    if (!this.sortable || !column.sortable) {\r\n      return;\r\n    }\r\n\r\n    if (this.sortProperty !== column.property) {\r\n      this.sortProperty = column.property;\r\n      this.direction = Direction.NONE;\r\n    }\r\n\r\n    this.updateDirection();\r\n    this.sortData();\r\n    this.updatePage(1, this.pageSize);\r\n    this.updateDisplayData();\r\n  }\r\n\r\n  handlePageChangeButtonClick(step: 1 | -1) {\r\n    const newPage = this.currentPage + step;\r\n    this.updatePage(newPage, this.pageSize);\r\n    if (newPage > 0) {\r\n      this.updateDisplayData();\r\n    }\r\n  }\r\n\r\n  updateDisplayData() {\r\n    const pageSize = this.pageSize || this.sortedData.length;\r\n    this.displayData = this.sortedData.slice(\r\n      (this.currentPage - 1) * pageSize,\r\n      this.currentPage * pageSize,\r\n    );\r\n  }\r\n}\r\n",
             "styleUrl": "./t-grid.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -469,7 +512,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 60,
+                "line": 63,
                 "jsdoctags": [
                     {
                         "name": "changeDetectorRef",
@@ -483,7 +526,7 @@
                 ]
             },
             "extends": [],
-            "templateData": "<div class=\"table-wrapper\">\r\n  <cdk-virtual-scroll-viewport itemSize=\"36\" style=\"height: 400px; width: 100%\">\r\n    <table>\r\n      <thead [style.top]=\"getTableHeaderTop()\">\r\n        <tr>\r\n          <th\r\n            *ngFor=\"let column of columnQuery\"\r\n            (click)=\"handleColumnClick(column)\"\r\n          >\r\n            <button\r\n              [ngClass]=\"{ sortable: sortable && column.sortable }\"\r\n              [disabled]=\"isLoading\"\r\n            >\r\n              <!--I've had some problems loading SVG files into the html template, so I added it manually, sorry-->\r\n              <svg\r\n                [ngSwitch]=\"sortProperty === column.property && direction\"\r\n                width=\"15\"\r\n                height=\"15\"\r\n                xmlns=\"http://www.w3.org/2000/svg\"\r\n                viewBox=\"0 0 24 24\"\r\n              >\r\n                <ng-container *ngSwitchCase=\"'asc'\">\r\n                  <polyline\r\n                    points=\"19 10 12 3 5 10\"\r\n                    fill=\"none\"\r\n                    stroke=\"white\"\r\n                    stroke-width=\"3\"\r\n                    stroke-miterlimit=\"10\"\r\n                  />\r\n                  <line\r\n                    x1=\"12\"\r\n                    y1=\"3\"\r\n                    x2=\"12\"\r\n                    y2=\"22\"\r\n                    fill=\"none\"\r\n                    stroke=\"white\"\r\n                    stroke-width=\"3\"\r\n                    stroke-miterlimit=\"10\"\r\n                  />\r\n                </ng-container>\r\n                <ng-container *ngSwitchCase=\"'desc'\">\r\n                  <polyline\r\n                    points=\"5 14 12 21 19 14\"\r\n                    fill=\"none\"\r\n                    stroke=\"white\"\r\n                    stroke-width=\"3\"\r\n                    stroke-miterlimit=\"10\"\r\n                  />\r\n                  <line\r\n                    x1=\"12\"\r\n                    y1=\"21\"\r\n                    x2=\"12\"\r\n                    y2=\"2\"\r\n                    fill=\"none\"\r\n                    stroke=\"white\"\r\n                    stroke-width=\"3\"\r\n                    stroke-miterlimit=\"10\"\r\n                  />\r\n                </ng-container>\r\n                <ng-container *ngSwitchCase=\"'none'\"></ng-container>\r\n              </svg>\r\n              <span>\r\n                {{ column.name }}\r\n              </span>\r\n            </button>\r\n          </th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <ng-content\r\n          *ngIf=\"\r\n            isLoading && originalData.length === 0;\r\n            then thenBlock;\r\n            else elseBlock\r\n          \"\r\n        ></ng-content>\r\n        <ng-template #thenBlock> <div class=\"loader\"></div> </ng-template>\r\n        <ng-template #elseBlock>\r\n          <tr *cdkVirtualFor=\"let item of displayData; templateCacheSize: 0\">\r\n            <td *ngFor=\"let column of columnQuery\">\r\n              <div>\r\n                {{ item[column.property] }}\r\n              </div>\r\n            </td>\r\n          </tr>\r\n        </ng-template>\r\n      </tbody>\r\n    </table>\r\n  </cdk-virtual-scroll-viewport>\r\n  <div class=\"control-wrapper\" *ngIf=\"pageSize !== null\">\r\n    <div class=\"total\">\r\n      <span>\r\n        Total: {{ originalData.length }} {{ isLoading ? \"(loading...)\" : \"\" }}\r\n      </span>\r\n    </div>\r\n    <div class=\"page-number\">\r\n      <button\r\n        [disabled]=\"isLoading\"\r\n        (click)=\"updatePageNumber(currentPage - 1)\"\r\n      >\r\n        Back\r\n      </button>\r\n      <span> Page: {{ currentPage }} </span>\r\n      <button\r\n        [disabled]=\"isLoading\"\r\n        (click)=\"updatePageNumber(currentPage + 1)\"\r\n      >\r\n        Next\r\n      </button>\r\n    </div>\r\n    <div class=\"page-size\">\r\n      <label for=\"pageSize\"> Page size: </label>\r\n      <input\r\n        name=\"pageSize\"\r\n        type=\"number\"\r\n        min=\"1\"\r\n        [value]=\"pageSize\"\r\n        [disabled]=\"isLoading\"\r\n        (change)=\"handlePageSizeChange($event)\"\r\n      />\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+            "templateData": "<div class=\"table-wrapper\">\r\n  <cdk-virtual-scroll-viewport itemSize=\"36\" style=\"height: 400px; width: 100%\">\r\n    <table>\r\n      <thead [style.top]=\"getTableHeaderTop()\">\r\n        <tr>\r\n          <th\r\n            *ngFor=\"let column of columnQuery\"\r\n            (click)=\"handleColumnClick(column)\"\r\n          >\r\n            <button\r\n              [ngClass]=\"{ sortable: sortable && column.sortable }\"\r\n              [disabled]=\"isLoading\"\r\n            >\r\n              <!--I've had some problems loading SVG files into the html template, so I added it manually, sorry-->\r\n              <svg\r\n                [ngSwitch]=\"sortProperty === column.property && direction\"\r\n                width=\"15\"\r\n                height=\"15\"\r\n                xmlns=\"http://www.w3.org/2000/svg\"\r\n                viewBox=\"0 0 24 24\"\r\n              >\r\n                <ng-container *ngSwitchCase=\"'asc'\">\r\n                  <polyline\r\n                    points=\"19 10 12 3 5 10\"\r\n                    fill=\"none\"\r\n                    stroke=\"white\"\r\n                    stroke-width=\"3\"\r\n                    stroke-miterlimit=\"10\"\r\n                  />\r\n                  <line\r\n                    x1=\"12\"\r\n                    y1=\"3\"\r\n                    x2=\"12\"\r\n                    y2=\"22\"\r\n                    fill=\"none\"\r\n                    stroke=\"white\"\r\n                    stroke-width=\"3\"\r\n                    stroke-miterlimit=\"10\"\r\n                  />\r\n                </ng-container>\r\n                <ng-container *ngSwitchCase=\"'desc'\">\r\n                  <polyline\r\n                    points=\"5 14 12 21 19 14\"\r\n                    fill=\"none\"\r\n                    stroke=\"white\"\r\n                    stroke-width=\"3\"\r\n                    stroke-miterlimit=\"10\"\r\n                  />\r\n                  <line\r\n                    x1=\"12\"\r\n                    y1=\"21\"\r\n                    x2=\"12\"\r\n                    y2=\"2\"\r\n                    fill=\"none\"\r\n                    stroke=\"white\"\r\n                    stroke-width=\"3\"\r\n                    stroke-miterlimit=\"10\"\r\n                  />\r\n                </ng-container>\r\n                <ng-container *ngSwitchCase=\"'none'\"></ng-container>\r\n              </svg>\r\n              <span>\r\n                {{ column.name }}\r\n              </span>\r\n            </button>\r\n          </th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <ng-content\r\n          *ngIf=\"\r\n            isLoading && originalData.length === 0;\r\n            then thenBlock;\r\n            else elseBlock\r\n          \"\r\n        ></ng-content>\r\n        <ng-template #thenBlock> <div class=\"loader\"></div> </ng-template>\r\n        <ng-template #elseBlock>\r\n          <tr *cdkVirtualFor=\"let item of displayData; templateCacheSize: 0\">\r\n            <td *ngFor=\"let column of columnQuery\">\r\n              <div>\r\n                {{ item[column.property] }}\r\n              </div>\r\n            </td>\r\n          </tr>\r\n        </ng-template>\r\n      </tbody>\r\n    </table>\r\n  </cdk-virtual-scroll-viewport>\r\n  <div class=\"control-wrapper\" *ngIf=\"pageSize !== null\">\r\n    <div class=\"total\">\r\n      <span>\r\n        Total: {{ originalData.length }} {{ isLoading ? \"(loading...)\" : \"\" }}\r\n      </span>\r\n    </div>\r\n    <div class=\"page-number\">\r\n      <button [disabled]=\"isLoading\" (click)=\"handlePageChangeButtonClick(-1)\">\r\n        Back\r\n      </button>\r\n      <span> Page: {{ currentPage }} </span>\r\n      <button [disabled]=\"isLoading\" (click)=\"handlePageChangeButtonClick(+1)\">\r\n        Next\r\n      </button>\r\n    </div>\r\n    <div class=\"page-size\">\r\n      <label for=\"pageSize\"> Page size: </label>\r\n      <input\r\n        id=\"pageSize\"\r\n        type=\"number\"\r\n        min=\"1\"\r\n        [value]=\"pageSize\"\r\n        [disabled]=\"isLoading\"\r\n        (change)=\"handlePageSizeChange($event)\"\r\n      />\r\n    </div>\r\n  </div>\r\n</div>\r\n"
         },
         {
             "name": "TProgressComponent",
@@ -981,7 +1024,7 @@
                 "linktype": "component",
                 "name": "TGridComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/24",
+                "coverageCount": "0/25",
                 "status": "low"
             },
             {
