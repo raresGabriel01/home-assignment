@@ -70,7 +70,7 @@ export const SmallProgress: Story = {
   },
 };
 
-export const RadiusError: Story = {
+export const VerySmallRadius: Story = {
   args: {
     radius: 30,
     color: 'blue',
@@ -78,10 +78,18 @@ export const RadiusError: Story = {
   },
 };
 
-export const ProgressError: Story = {
+export const Over100Progress: Story = {
   args: {
     radius: 70,
     color: 'blue',
     progress: 120,
+  },
+};
+
+export const NegativeProgress: Story = {
+  args: {
+    radius: 70,
+    color: 'pink',
+    progress: -50,
   },
 };

@@ -1,10 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {
-  PROGRESS_ERROR_MESSAGE,
-  RADIUS_ERROR_MESSAGE,
-  TProgressComponent,
-} from './t-progress.component';
+import { TProgressComponent } from './t-progress.component';
 
 describe('TProgressComponent', () => {
   let component: TProgressComponent;
@@ -24,67 +20,28 @@ describe('TProgressComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should throw radius error', () => {
-    try {
-      component.ngOnChanges({
-        radius: {
-          firstChange: true,
-          isFirstChange: () => true,
-          previousValue: undefined,
-          currentValue: 20,
-        },
-        progress: {
-          firstChange: true,
-          isFirstChange: () => true,
-          previousValue: undefined,
-          currentValue: 20,
-        },
-      });
-    } catch (e) {
-      expect((e as Error).message).toBe(RADIUS_ERROR_MESSAGE);
-    }
+  it('should set render radius to 50 in case of smaller values', () => {
+    component.radius = 10;
+    component.progress = 20;
+    fixture.detectChanges();
+    component.ngOnInit();
+    expect(component.renderRadius).toBe(50);
   });
 
-  it('should throw progress error on negative values', () => {
-    try {
-      component.ngOnChanges({
-        radius: {
-          firstChange: true,
-          isFirstChange: () => true,
-          previousValue: undefined,
-          currentValue: 60,
-        },
-        progress: {
-          firstChange: true,
-          isFirstChange: () => true,
-          previousValue: undefined,
-          currentValue: -20,
-        },
-      });
-    } catch (e) {
-      expect((e as Error).message).toBe(PROGRESS_ERROR_MESSAGE);
-    }
+  it('shoul set render progress to 0 in case of negative values', () => {
+    component.radius = 50;
+    component.progress = -50;
+    fixture.detectChanges();
+    component.ngOnInit();
+    expect(component.renderProgress).toBe(0);
   });
 
-  it('should throw progress error on values over 100', () => {
-    try {
-      component.ngOnChanges({
-        radius: {
-          firstChange: true,
-          isFirstChange: () => true,
-          previousValue: undefined,
-          currentValue: 60,
-        },
-        progress: {
-          firstChange: true,
-          isFirstChange: () => true,
-          previousValue: undefined,
-          currentValue: 120,
-        },
-      });
-    } catch (e) {
-      expect((e as Error).message).toBe(PROGRESS_ERROR_MESSAGE);
-    }
+  it('should set render progress to 100 in case of larger values', () => {
+    component.radius = 50;
+    component.progress = 120;
+    fixture.detectChanges();
+    component.ngOnInit();
+    expect(component.renderProgress).toBe(100);
   });
 
   it('should return correct path string', () => {
@@ -94,5 +51,17 @@ describe('TProgressComponent', () => {
     component.ngOnInit();
     const pathString = component.getPathString();
     expect(pathString).toBe('M 110, 10 A 100, 100, 0 1 1 110, 210');
+  });
+
+  it('should emit complete event on 100% progress', () => {
+    component.radius = 50;
+    component.progress = 100;
+    const completeSpy = spyOn(component.complete, 'emit');
+
+    fixture.detectChanges();
+    component.ngOnInit();
+    component.ngAfterViewInit();
+
+    expect(completeSpy).toHaveBeenCalledTimes(1);
   });
 });

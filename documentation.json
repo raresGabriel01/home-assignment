@@ -125,8 +125,9 @@
         },
         {
             "name": "TGridComponent",
-            "id": "component-TGridComponent-9977ea5c1e5b5b0adf73b142f3771ad735685a2c574e6dd27670f66fce157b3ab0a65b2b45910f5ae11759d41c0576725b8bbe9612b572e9fb964cad435bd8c0",
+            "id": "component-TGridComponent-0fe1c3dd067d36a74e09c4e1cc5c67ed286e22ca7b1f9058712750e15ac61494bd08b670b9d87ff304b76302bf3f1b0bf1690b304c2a994d8b318263cd30e299",
             "file": "src/app/components/t-grid/t-grid.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -145,7 +146,7 @@
                     "name": "data",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 37,
+                    "line": 40,
                     "type": "T[] | Observable<T[]>",
                     "decorators": []
                 },
@@ -153,7 +154,7 @@
                     "name": "pageSize",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 39,
+                    "line": 42,
                     "type": "number | null",
                     "decorators": []
                 },
@@ -161,7 +162,7 @@
                     "name": "sortable",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 41,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -172,7 +173,7 @@
                     "defaultValue": "new EventEmitter<PaginationChangeEvent>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 44,
                     "type": "EventEmitter"
                 },
                 {
@@ -180,7 +181,7 @@
                     "defaultValue": "new EventEmitter<SortChangeEvent>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 43,
                     "type": "EventEmitter"
                 }
             ],
@@ -192,7 +193,7 @@
                     "type": "QueryList<TColumnComponent<T>>",
                     "optional": false,
                     "description": "",
-                    "line": 42,
+                    "line": 45,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -211,7 +212,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 49
+                    "line": 52
                 },
                 {
                     "name": "direction",
@@ -221,7 +222,7 @@
                     "type": "Direction",
                     "optional": false,
                     "description": "",
-                    "line": 51
+                    "line": 54
                 },
                 {
                     "name": "displayData",
@@ -231,7 +232,7 @@
                     "type": "T[]",
                     "optional": false,
                     "description": "",
-                    "line": 48
+                    "line": 51
                 },
                 {
                     "name": "isLoading",
@@ -241,7 +242,7 @@
                     "type": "boolean",
                     "optional": false,
                     "description": "",
-                    "line": 52
+                    "line": 55
                 },
                 {
                     "name": "originalData",
@@ -251,7 +252,7 @@
                     "type": "T[]",
                     "optional": false,
                     "description": "",
-                    "line": 46
+                    "line": 49
                 },
                 {
                     "name": "sortedData",
@@ -261,7 +262,7 @@
                     "type": "T[]",
                     "optional": false,
                     "description": "",
-                    "line": 47
+                    "line": 50
                 },
                 {
                     "name": "sortProperty",
@@ -270,7 +271,7 @@
                     "type": "",
                     "optional": true,
                     "description": "",
-                    "line": 50
+                    "line": 53
                 }
             ],
             "methodsClass": [
@@ -287,7 +288,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 138,
+                    "line": 145,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -315,7 +316,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 102,
+                    "line": 109,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -336,7 +337,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 54,
+                    "line": 59,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -346,7 +347,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 123,
+                    "line": 130,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -356,7 +357,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 108,
+                    "line": 115,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -366,7 +367,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 154,
+                    "line": 161,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -383,7 +384,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 82,
+                    "line": 89,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -417,13 +418,39 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\r\n  Component,\r\n  ContentChildren,\r\n  EventEmitter,\r\n  Input,\r\n  Output,\r\n  QueryList,\r\n} from '@angular/core';\r\nimport { Observable } from 'rxjs';\r\nimport { TColumnComponent } from '../t-column/t-column.component';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport enum Direction {\r\n  NONE = 'none',\r\n  ASCENDING = 'asc',\r\n  DESCENDING = 'desc',\r\n}\r\n\r\nexport type SortChangeEvent = {\r\n  columnName: string;\r\n  direction: Direction;\r\n};\r\n\r\nexport type PaginationChangeEvent = {\r\n  currentPage: number;\r\n  pageSize: number | null;\r\n};\r\n\r\n@Component({\r\n  selector: 't-grid',\r\n  standalone: true,\r\n  imports: [CommonModule, TColumnComponent],\r\n  templateUrl: './t-grid.component.html',\r\n  styleUrl: './t-grid.component.scss',\r\n})\r\nexport class TGridComponent<T> {\r\n  @Input() data: T[] | Observable<T[]>;\r\n  @Input() sortable: boolean;\r\n  @Input() pageSize: number | null;\r\n  @Output() sortChange = new EventEmitter<SortChangeEvent>();\r\n  @Output() paginationChange = new EventEmitter<PaginationChangeEvent>();\r\n  @ContentChildren(TColumnComponent) columnQuery: QueryList<\r\n    TColumnComponent<T>\r\n  >;\r\n\r\n  originalData: T[] = [];\r\n  sortedData: T[] = [];\r\n  displayData: T[] = [];\r\n  currentPage: number = 1;\r\n  sortProperty?: keyof T;\r\n  direction: Direction = Direction.NONE;\r\n  isLoading: boolean = false;\r\n\r\n  ngOnInit() {\r\n    if (this.data instanceof Observable) {\r\n      this.isLoading = true;\r\n      this.data.subscribe({\r\n        next: (nextData) => {\r\n          this.originalData = [...this.originalData, ...nextData];\r\n          // The reason that I am doing it here instead of on the `complete` method\r\n          // Is that maybe the pageSize is large/null and it need to constantly update the displayedData\r\n          this.displayData = this.originalData.slice(\r\n            0,\r\n            this.pageSize || this.originalData.length,\r\n          );\r\n        },\r\n        error: (error) => {\r\n          console.error(error);\r\n        },\r\n        complete: () => {\r\n          this.isLoading = false;\r\n          this.sortedData = [...this.originalData];\r\n        },\r\n      });\r\n    } else {\r\n      this.displayData = this.data.slice(0, this.pageSize || this.data.length);\r\n      this.originalData = [...this.data];\r\n      this.sortedData = [...this.data];\r\n    }\r\n  }\r\n\r\n  updatePageNumber(pageNumber: number) {\r\n    if (!this.pageSize) {\r\n      return;\r\n    }\r\n\r\n    if (\r\n      pageNumber < 1 ||\r\n      pageNumber > Math.ceil(this.originalData.length / this.pageSize)\r\n    ) {\r\n      return;\r\n    }\r\n\r\n    this.currentPage = pageNumber;\r\n    this.updateDisplayData();\r\n    this.paginationChange.emit({\r\n      pageSize: this.pageSize,\r\n      currentPage: this.currentPage,\r\n    });\r\n  }\r\n\r\n  handlePageSizeChange(event: Event) {\r\n    const input = event.target as HTMLInputElement;\r\n    this.pageSize = parseInt(input.value);\r\n    this.updatePageNumber(1);\r\n  }\r\n\r\n  updateDirection() {\r\n    if (this.direction === Direction.NONE) {\r\n      this.direction = Direction.ASCENDING;\r\n    } else if (this.direction === Direction.ASCENDING) {\r\n      this.direction = Direction.DESCENDING;\r\n    } else {\r\n      this.direction = Direction.NONE;\r\n    }\r\n\r\n    this.sortChange.emit({\r\n      columnName: this.sortProperty as string,\r\n      direction: this.direction,\r\n    });\r\n  }\r\n\r\n  sortData() {\r\n    if (this.direction === Direction.NONE) {\r\n      this.sortedData = [...this.originalData];\r\n    } else if (this.direction === Direction.ASCENDING) {\r\n      this.sortedData.sort((a, b) => {\r\n        const valueA = a[this.sortProperty as keyof T];\r\n        const valueB = b[this.sortProperty as keyof T];\r\n\r\n        return valueA < valueB ? -1 : 1;\r\n      });\r\n    } else {\r\n      this.sortedData.reverse();\r\n    }\r\n  }\r\n\r\n  handleColumnClick(column: TColumnComponent<T>) {\r\n    if (!this.sortable || !column.sortable) {\r\n      return;\r\n    }\r\n\r\n    if (this.sortProperty !== column.property) {\r\n      this.sortProperty = column.property;\r\n      this.direction = Direction.NONE;\r\n    }\r\n\r\n    this.updateDirection();\r\n    this.sortData();\r\n    this.updatePageNumber(1);\r\n    this.updateDisplayData();\r\n  }\r\n\r\n  updateDisplayData() {\r\n    const pageSize = this.pageSize || this.sortedData.length;\r\n    this.displayData = this.sortedData.slice(\r\n      (this.currentPage - 1) * pageSize,\r\n      this.currentPage * pageSize,\r\n    );\r\n  }\r\n}\r\n",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  ChangeDetectorRef,\r\n  Component,\r\n  ContentChildren,\r\n  EventEmitter,\r\n  Input,\r\n  Output,\r\n  QueryList,\r\n} from '@angular/core';\r\nimport { Observable } from 'rxjs';\r\nimport { TColumnComponent } from '../t-column/t-column.component';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport enum Direction {\r\n  NONE = 'none',\r\n  ASCENDING = 'asc',\r\n  DESCENDING = 'desc',\r\n}\r\n\r\nexport type SortChangeEvent = {\r\n  columnName: string;\r\n  direction: Direction;\r\n};\r\n\r\nexport type PaginationChangeEvent = {\r\n  currentPage: number;\r\n  pageSize: number | null;\r\n};\r\n\r\n@Component({\r\n  selector: 't-grid',\r\n  standalone: true,\r\n  imports: [CommonModule, TColumnComponent],\r\n  templateUrl: './t-grid.component.html',\r\n  styleUrl: './t-grid.component.scss',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class TGridComponent<T> {\r\n  @Input() data: T[] | Observable<T[]>;\r\n  @Input() sortable: boolean;\r\n  @Input() pageSize: number | null;\r\n  @Output() sortChange = new EventEmitter<SortChangeEvent>();\r\n  @Output() paginationChange = new EventEmitter<PaginationChangeEvent>();\r\n  @ContentChildren(TColumnComponent) columnQuery: QueryList<\r\n    TColumnComponent<T>\r\n  >;\r\n\r\n  originalData: T[] = [];\r\n  sortedData: T[] = [];\r\n  displayData: T[] = [];\r\n  currentPage: number = 1;\r\n  sortProperty?: keyof T;\r\n  direction: Direction = Direction.NONE;\r\n  isLoading: boolean = false;\r\n\r\n  constructor(private changeDetectorRef: ChangeDetectorRef) {}\r\n\r\n  ngOnInit() {\r\n    if (this.data instanceof Observable) {\r\n      this.isLoading = true;\r\n      this.data.subscribe({\r\n        next: (nextData) => {\r\n          this.originalData = [...this.originalData, ...nextData];\r\n          // The reason that I am doing it here instead of on the `complete` method\r\n          // Is that maybe the pageSize is large/null and it need to constantly update the displayedData\r\n          this.displayData = this.originalData.slice(\r\n            0,\r\n            this.pageSize || this.originalData.length,\r\n          );\r\n          this.changeDetectorRef.detectChanges();\r\n        },\r\n        error: (error) => {\r\n          console.error(error);\r\n        },\r\n        complete: () => {\r\n          this.isLoading = false;\r\n          this.sortedData = [...this.originalData];\r\n          this.changeDetectorRef.detectChanges();\r\n        },\r\n      });\r\n    } else {\r\n      this.displayData = this.data.slice(0, this.pageSize || this.data.length);\r\n      this.originalData = [...this.data];\r\n      this.sortedData = [...this.data];\r\n    }\r\n  }\r\n\r\n  updatePageNumber(pageNumber: number) {\r\n    if (!this.pageSize) {\r\n      return;\r\n    }\r\n\r\n    if (\r\n      pageNumber < 1 ||\r\n      pageNumber > Math.ceil(this.originalData.length / this.pageSize)\r\n    ) {\r\n      return;\r\n    }\r\n\r\n    this.currentPage = pageNumber;\r\n    this.updateDisplayData();\r\n    this.paginationChange.emit({\r\n      pageSize: this.pageSize,\r\n      currentPage: this.currentPage,\r\n    });\r\n  }\r\n\r\n  handlePageSizeChange(event: Event) {\r\n    const input = event.target as HTMLInputElement;\r\n    this.pageSize = parseInt(input.value);\r\n    this.updatePageNumber(1);\r\n  }\r\n\r\n  updateDirection() {\r\n    if (this.direction === Direction.NONE) {\r\n      this.direction = Direction.ASCENDING;\r\n    } else if (this.direction === Direction.ASCENDING) {\r\n      this.direction = Direction.DESCENDING;\r\n    } else {\r\n      this.direction = Direction.NONE;\r\n    }\r\n\r\n    this.sortChange.emit({\r\n      columnName: this.sortProperty as string,\r\n      direction: this.direction,\r\n    });\r\n  }\r\n\r\n  sortData() {\r\n    if (this.direction === Direction.NONE) {\r\n      this.sortedData = [...this.originalData];\r\n    } else if (this.direction === Direction.ASCENDING) {\r\n      this.sortedData.sort((a, b) => {\r\n        const valueA = a[this.sortProperty as keyof T];\r\n        const valueB = b[this.sortProperty as keyof T];\r\n\r\n        return valueA < valueB ? -1 : 1;\r\n      });\r\n    } else {\r\n      this.sortedData.reverse();\r\n    }\r\n  }\r\n\r\n  handleColumnClick(column: TColumnComponent<T>) {\r\n    if (!this.sortable || !column.sortable) {\r\n      return;\r\n    }\r\n\r\n    if (this.sortProperty !== column.property) {\r\n      this.sortProperty = column.property;\r\n      this.direction = Direction.NONE;\r\n    }\r\n\r\n    this.updateDirection();\r\n    this.sortData();\r\n    this.updatePageNumber(1);\r\n    this.updateDisplayData();\r\n  }\r\n\r\n  updateDisplayData() {\r\n    const pageSize = this.pageSize || this.sortedData.length;\r\n    this.displayData = this.sortedData.slice(\r\n      (this.currentPage - 1) * pageSize,\r\n      this.currentPage * pageSize,\r\n    );\r\n  }\r\n}\r\n",
             "styleUrl": "./t-grid.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "changeDetectorRef",
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 55,
+                "jsdoctags": [
+                    {
+                        "name": "changeDetectorRef",
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
             "extends": [],
-            "templateData": "<div class=\"table-wrapper\">\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th\r\n          *ngFor=\"let column of columnQuery\"\r\n          (click)=\"handleColumnClick(column)\"\r\n        >\r\n          <button\r\n            [ngClass]=\"{ sortable: sortable && column.sortable }\"\r\n            [disabled]=\"isLoading\"\r\n          >\r\n            <!--I've had some problems loading SVG files into the html template, so I added it manually, sorry-->\r\n            <svg\r\n              [ngSwitch]=\"sortProperty === column.property && direction\"\r\n              width=\"15\"\r\n              height=\"15\"\r\n              xmlns=\"http://www.w3.org/2000/svg\"\r\n              viewBox=\"0 0 24 24\"\r\n            >\r\n              <ng-container *ngSwitchCase=\"'asc'\">\r\n                <polyline\r\n                  points=\"19 10 12 3 5 10\"\r\n                  fill=\"none\"\r\n                  stroke=\"white\"\r\n                  stroke-width=\"3\"\r\n                  stroke-miterlimit=\"10\"\r\n                />\r\n                <line\r\n                  x1=\"12\"\r\n                  y1=\"3\"\r\n                  x2=\"12\"\r\n                  y2=\"22\"\r\n                  fill=\"none\"\r\n                  stroke=\"white\"\r\n                  stroke-width=\"3\"\r\n                  stroke-miterlimit=\"10\"\r\n                />\r\n              </ng-container>\r\n              <ng-container *ngSwitchCase=\"'desc'\">\r\n                <polyline\r\n                  points=\"5 14 12 21 19 14\"\r\n                  fill=\"none\"\r\n                  stroke=\"white\"\r\n                  stroke-width=\"3\"\r\n                  stroke-miterlimit=\"10\"\r\n                />\r\n                <line\r\n                  x1=\"12\"\r\n                  y1=\"21\"\r\n                  x2=\"12\"\r\n                  y2=\"2\"\r\n                  fill=\"none\"\r\n                  stroke=\"white\"\r\n                  stroke-width=\"3\"\r\n                  stroke-miterlimit=\"10\"\r\n                />\r\n              </ng-container>\r\n              <ng-container *ngSwitchCase=\"'none'\"></ng-container>\r\n            </svg>\r\n            <span>\r\n              {{ column.name }}\r\n            </span>\r\n          </button>\r\n        </th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <ng-content\r\n        *ngIf=\"\r\n          isLoading && originalData.length === 0;\r\n          then thenBlock;\r\n          else elseBlock\r\n        \"\r\n      ></ng-content>\r\n      <ng-template #thenBlock> Loading... </ng-template>\r\n      <ng-template #elseBlock>\r\n        <tr *ngFor=\"let item of displayData\">\r\n          <td *ngFor=\"let column of columnQuery\">\r\n            {{ item[column.property] }}\r\n          </td>\r\n        </tr>\r\n      </ng-template>\r\n    </tbody>\r\n    <tfoot *ngIf=\"pageSize !== null\">\r\n      <input\r\n        type=\"number\"\r\n        min=\"1\"\r\n        [value]=\"pageSize\"\r\n        [disabled]=\"isLoading\"\r\n        (change)=\"handlePageSizeChange($event)\"\r\n      />\r\n      <span\r\n        >Total:{{ originalData.length }} {{ isLoading && \"(loading...)\" }}</span\r\n      >\r\n      <button\r\n        [disabled]=\"isLoading\"\r\n        (click)=\"updatePageNumber(currentPage - 1)\"\r\n      >\r\n        Left\r\n      </button>\r\n      <span>{{ currentPage }}</span>\r\n      <button\r\n        [disabled]=\"isLoading\"\r\n        (click)=\"updatePageNumber(currentPage + 1)\"\r\n      >\r\n        Right\r\n      </button>\r\n    </tfoot>\r\n  </table>\r\n</div>\r\n"
+            "templateData": "<div class=\"table-wrapper\">\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th\r\n          *ngFor=\"let column of columnQuery\"\r\n          (click)=\"handleColumnClick(column)\"\r\n        >\r\n          <button\r\n            [ngClass]=\"{ sortable: sortable && column.sortable }\"\r\n            [disabled]=\"isLoading\"\r\n          >\r\n            <!--I've had some problems loading SVG files into the html template, so I added it manually, sorry-->\r\n            <svg\r\n              [ngSwitch]=\"sortProperty === column.property && direction\"\r\n              width=\"15\"\r\n              height=\"15\"\r\n              xmlns=\"http://www.w3.org/2000/svg\"\r\n              viewBox=\"0 0 24 24\"\r\n            >\r\n              <ng-container *ngSwitchCase=\"'asc'\">\r\n                <polyline\r\n                  points=\"19 10 12 3 5 10\"\r\n                  fill=\"none\"\r\n                  stroke=\"white\"\r\n                  stroke-width=\"3\"\r\n                  stroke-miterlimit=\"10\"\r\n                />\r\n                <line\r\n                  x1=\"12\"\r\n                  y1=\"3\"\r\n                  x2=\"12\"\r\n                  y2=\"22\"\r\n                  fill=\"none\"\r\n                  stroke=\"white\"\r\n                  stroke-width=\"3\"\r\n                  stroke-miterlimit=\"10\"\r\n                />\r\n              </ng-container>\r\n              <ng-container *ngSwitchCase=\"'desc'\">\r\n                <polyline\r\n                  points=\"5 14 12 21 19 14\"\r\n                  fill=\"none\"\r\n                  stroke=\"white\"\r\n                  stroke-width=\"3\"\r\n                  stroke-miterlimit=\"10\"\r\n                />\r\n                <line\r\n                  x1=\"12\"\r\n                  y1=\"21\"\r\n                  x2=\"12\"\r\n                  y2=\"2\"\r\n                  fill=\"none\"\r\n                  stroke=\"white\"\r\n                  stroke-width=\"3\"\r\n                  stroke-miterlimit=\"10\"\r\n                />\r\n              </ng-container>\r\n              <ng-container *ngSwitchCase=\"'none'\"></ng-container>\r\n            </svg>\r\n            <span>\r\n              {{ column.name }}\r\n            </span>\r\n          </button>\r\n        </th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <ng-content\r\n        *ngIf=\"\r\n          isLoading && originalData.length === 0;\r\n          then thenBlock;\r\n          else elseBlock\r\n        \"\r\n      ></ng-content>\r\n      <ng-template #thenBlock> <div class=\"loader\"></div> </ng-template>\r\n      <ng-template #elseBlock>\r\n        <tr *ngFor=\"let item of displayData\">\r\n          <td *ngFor=\"let column of columnQuery\">\r\n            <div>\r\n              {{ item[column.property] }}\r\n            </div>\r\n          </td>\r\n        </tr>\r\n      </ng-template>\r\n    </tbody>\r\n  </table>\r\n  <div class=\"control-wrapper\" *ngIf=\"pageSize !== null\">\r\n    <div class=\"total\">\r\n      <span>\r\n        Total: {{ originalData.length }} {{ isLoading ? \"(loading...)\" : \"\" }}\r\n      </span>\r\n    </div>\r\n    <div class=\"page-number\">\r\n      <button\r\n        [disabled]=\"isLoading\"\r\n        (click)=\"updatePageNumber(currentPage - 1)\"\r\n      >\r\n        Back\r\n      </button>\r\n      <span> Page: {{ currentPage }} </span>\r\n      <button\r\n        [disabled]=\"isLoading\"\r\n        (click)=\"updatePageNumber(currentPage + 1)\"\r\n      >\r\n        Next\r\n      </button>\r\n    </div>\r\n    <div class=\"page-size\">\r\n      <label for=\"pageSize\"> Page size: </label>\r\n      <input\r\n        name=\"pageSize\"\r\n        type=\"number\"\r\n        min=\"1\"\r\n        [value]=\"pageSize\"\r\n        [disabled]=\"isLoading\"\r\n        (change)=\"handlePageSizeChange($event)\"\r\n      />\r\n    </div>\r\n  </div>\r\n</div>\r\n"
         },
         {
             "name": "TProgressComponent",
@@ -628,6 +655,16 @@
                 "defaultValue": "{\r\n  providers: [provideRouter(routes)],\r\n}"
             },
             {
+                "name": "createMockData",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/t-grid/utils.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(count: number) =>\r\n  faker.helpers.multiple(createMockUser, {\r\n    count,\r\n  })"
+            },
+            {
                 "name": "createMockDataObserver",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -635,7 +672,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "() => {\r\n  const dataObservable = of(\r\n    faker.helpers.multiple(createMockUser, { count: 5 }),\r\n    faker.helpers.multiple(createMockUser, { count: 5 }),\r\n    faker.helpers.multiple(createMockUser, { count: 5 }),\r\n  );\r\n  return dataObservable.pipe(concatMap((item) => of(item).pipe(delay(2500))));\r\n}"
+                "defaultValue": "(count: number) => {\r\n  const dataObservable = of(\r\n    faker.helpers.multiple(createMockUser, { count }),\r\n    faker.helpers.multiple(createMockUser, { count }),\r\n    faker.helpers.multiple(createMockUser, { count }),\r\n  );\r\n  return dataObservable.pipe(concatMap((item) => of(item).pipe(delay(2500))));\r\n}"
             },
             {
                 "name": "createMockUser",
@@ -646,16 +683,6 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "(): MockUser => ({\r\n  id: faker.string.nanoid(10),\r\n  firstName: faker.person.firstName(),\r\n  lastName: faker.person.lastName(),\r\n  phoneNumber: faker.phone.imei(),\r\n  email: faker.internet.email(),\r\n  address: faker.location.streetAddress(),\r\n  points: faker.number.int({ min: -100, max: 100 }),\r\n})"
-            },
-            {
-                "name": "MOCK_DATA",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/t-grid/utils.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "MockUser[]",
-                "defaultValue": "faker.helpers.multiple(createMockUser, {\r\n  count: 20,\r\n})"
             },
             {
                 "name": "PROGRESS_ERROR_MESSAGE",
@@ -782,6 +809,16 @@
             ],
             "src/stories/t-grid/utils.ts": [
                 {
+                    "name": "createMockData",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/t-grid/utils.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(count: number) =>\r\n  faker.helpers.multiple(createMockUser, {\r\n    count,\r\n  })"
+                },
+                {
                     "name": "createMockDataObserver",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
@@ -789,7 +826,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "() => {\r\n  const dataObservable = of(\r\n    faker.helpers.multiple(createMockUser, { count: 5 }),\r\n    faker.helpers.multiple(createMockUser, { count: 5 }),\r\n    faker.helpers.multiple(createMockUser, { count: 5 }),\r\n  );\r\n  return dataObservable.pipe(concatMap((item) => of(item).pipe(delay(2500))));\r\n}"
+                    "defaultValue": "(count: number) => {\r\n  const dataObservable = of(\r\n    faker.helpers.multiple(createMockUser, { count }),\r\n    faker.helpers.multiple(createMockUser, { count }),\r\n    faker.helpers.multiple(createMockUser, { count }),\r\n  );\r\n  return dataObservable.pipe(concatMap((item) => of(item).pipe(delay(2500))));\r\n}"
                 },
                 {
                     "name": "createMockUser",
@@ -800,16 +837,6 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "(): MockUser => ({\r\n  id: faker.string.nanoid(10),\r\n  firstName: faker.person.firstName(),\r\n  lastName: faker.person.lastName(),\r\n  phoneNumber: faker.phone.imei(),\r\n  email: faker.internet.email(),\r\n  address: faker.location.streetAddress(),\r\n  points: faker.number.int({ min: -100, max: 100 }),\r\n})"
-                },
-                {
-                    "name": "MOCK_DATA",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/t-grid/utils.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "MockUser[]",
-                    "defaultValue": "faker.helpers.multiple(createMockUser, {\r\n  count: 20,\r\n})"
                 }
             ],
             "src/app/components/t-progress/t-progress.component.ts": [
@@ -972,7 +999,7 @@
                 "linktype": "component",
                 "name": "TGridComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/21",
+                "coverageCount": "0/22",
                 "status": "low"
             },
             {
@@ -1009,6 +1036,16 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "createMockData",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/t-grid/utils.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "createMockDataObserver",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -1020,16 +1057,6 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "createMockUser",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/t-grid/utils.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "MOCK_DATA",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
