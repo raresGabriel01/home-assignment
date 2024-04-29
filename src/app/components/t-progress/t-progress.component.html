@@ -1,19 +1,17 @@
 <svg
-  *ngIf="
-    radius >= MINIMUM_RADIUS &&
-    progress >= MINIMUM_PROGRESS &&
-    progress <= MAXIMUM_PROGRESS
-  "
-  attr.height="{{ (radius + margin) * 2 }}px"
-  attr.width="{{ (radius + margin) * 2 }}px"
-  attr.viewBox="0 0 {{ (radius + margin) * 2 }} {{ (radius + margin) * 2 }}"
+  attr.height="{{ (renderRadius + margin) * 2 }}px"
+  attr.width="{{ (renderRadius + margin) * 2 }}px"
+  attr.viewBox="0 0 {{ (renderRadius + margin) * 2 }} {{
+    (renderRadius + margin) * 2
+  }}"
 >
-  <div *ngIf="progress < 100; then thenBlock; else elseBlock"></div>
+  <div *ngIf="renderProgress < 100; then thenBlock; else elseBlock"></div>
   <ng-template #thenBlock>
     <path
+      *ngIf="renderProgress > 0"
       fill="none"
       attr.stroke="{{ color }}"
-      attr.stroke-width="{{ 0.1 * radius }}"
+      attr.stroke-width="{{ 0.1 * renderRadius }}"
       stroke-linecap="round"
       attr.d="{{ getPathString() }}"
     />
@@ -22,22 +20,21 @@
     <circle
       fill="none"
       attr.stroke="{{ color }}"
-      attr.stroke-width="{{ 0.1 * radius }}"
-      attr.cx="{{ radius + margin }}"
-      attr.cy="{{ radius + margin }}"
-      attr.r="{{ radius }}"
+      attr.stroke-width="{{ 0.1 * renderRadius }}"
+      attr.cx="{{ renderRadius + margin }}"
+      attr.cy="{{ renderRadius + margin }}"
+      attr.r="{{ renderRadius }}"
     />
   </ng-template>
-
   <text
     [ngStyle]="{
-      'font-size': 0.7 * radius,
+      'font-size': 0.7 * renderRadius,
       fill: color,
       stroke: color
     }"
-    attr.x="{{ radius + margin }}"
-    attr.y="{{ radius + margin }}"
+    attr.x="{{ renderRadius + margin }}"
+    attr.y="{{ renderRadius + margin }}"
   >
-    {{ progress }}%
+    {{ renderProgress }}%
   </text>
 </svg>
