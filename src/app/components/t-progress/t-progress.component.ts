@@ -6,7 +6,6 @@ import {
   Input,
   NO_ERRORS_SCHEMA,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 
 type Point = {
@@ -38,7 +37,7 @@ export class TProgressComponent {
   public readonly MINIMUM_PROGRESS: number = 0;
   public readonly MAXIMUM_PROGRESS: number = 100;
 
-  ngOnInit() {
+  ngOnChanges() {
     this.renderRadius = Math.max(this.MINIMUM_RADIUS, this.radius);
     this.renderProgress = Math.max(
       this.MINIMUM_PROGRESS,
