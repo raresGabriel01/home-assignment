@@ -7,10 +7,15 @@ import {
   Input,
   Output,
   QueryList,
+  ViewChild,
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TColumnComponent } from '../t-column/t-column.component';
 import { CommonModule } from '@angular/common';
+import {
+  CdkVirtualScrollViewport,
+  ScrollingModule,
+} from '@angular/cdk/scrolling';
 
 export enum Direction {
   NONE = 'none',
@@ -31,7 +36,7 @@ export type PaginationChangeEvent = {
 @Component({
   selector: 't-grid',
   standalone: true,
-  imports: [CommonModule, TColumnComponent],
+  imports: [CommonModule, TColumnComponent, ScrollingModule],
   templateUrl: './t-grid.component.html',
   styleUrl: './t-grid.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,9 +47,12 @@ export class TGridComponent<T> {
   @Input() pageSize: number | null;
   @Output() sortChange = new EventEmitter<SortChangeEvent>();
   @Output() paginationChange = new EventEmitter<PaginationChangeEvent>();
+
   @ContentChildren(TColumnComponent) columnQuery: QueryList<
     TColumnComponent<T>
   >;
+  @ViewChild(CdkVirtualScrollViewport, { static: false })
+  public viewPort: CdkVirtualScrollViewport;
 
   originalData: T[] = [];
   sortedData: T[] = [];
@@ -86,20 +94,35 @@ export class TGridComponent<T> {
     }
   }
 
-  updatePageNumber(pageNumber: number) {
+  getTableHeaderTop() {
+    if (!this.viewPort || !this.viewPort['_renderedContentOffset']) {
+      return '-2px';
+    }
+    let offset = this.viewPort['_renderedContentOffset'];
+    return `-${offset + 2}px`;
+  }
+
+  updatePage(pageNumber: number, pageSize: number | null) {
     if (!this.pageSize) {
       return;
     }
 
     if (
       pageNumber < 1 ||
-      pageNumber > Math.ceil(this.originalData.length / this.pageSize)
+      pageNumber > Math.ceil(this.originalData.length / this.pageSize) ||
+      pageSize === null ||
+      pageSize < 1
     ) {
       return;
     }
 
+    // Early exit here to avoid events emitted in case nothing changes.
+    if (this.currentPage === pageNumber && this.pageSize === pageSize) {
+      return;
+    }
+
     this.currentPage = pageNumber;
-    this.updateDisplayData();
+    this.pageSize = pageSize;
     this.paginationChange.emit({
       pageSize: this.pageSize,
       currentPage: this.currentPage,
@@ -108,8 +131,9 @@ export class TGridComponent<T> {
 
   handlePageSizeChange(event: Event) {
     const input = event.target as HTMLInputElement;
-    this.pageSize = parseInt(input.value);
-    this.updatePageNumber(1);
+    const newPageSize = parseInt(input.value);
+    this.updatePage(1, newPageSize);
+    this.updateDisplayData();
   }
 
   updateDirection() {
@@ -154,8 +178,16 @@ export class TGridComponent<T> {
 
     this.updateDirection();
     this.sortData();
-    this.updatePageNumber(1);
+    this.updatePage(1, this.pageSize);
     this.updateDisplayData();
+  }
+
+  handlePageChangeButtonClick(step: 1 | -1) {
+    const newPage = this.currentPage + step;
+    this.updatePage(newPage, this.pageSize);
+    if (newPage > 0) {
+      this.updateDisplayData();
+    }
   }
 
   updateDisplayData() {

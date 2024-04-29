@@ -1,90 +1,92 @@
 <div class="table-wrapper">
-  <table>
-    <thead>
-      <tr>
-        <th
-          *ngFor="let column of columnQuery"
-          (click)="handleColumnClick(column)"
-        >
-          <button
-            [ngClass]="{ sortable: sortable && column.sortable }"
-            [disabled]="isLoading"
+  <cdk-virtual-scroll-viewport itemSize="36" style="height: 400px; width: 100%">
+    <table>
+      <thead [style.top]="getTableHeaderTop()">
+        <tr>
+          <th
+            *ngFor="let column of columnQuery"
+            (click)="handleColumnClick(column)"
           >
-            <!--I've had some problems loading SVG files into the html template, so I added it manually, sorry-->
-            <svg
-              [ngSwitch]="sortProperty === column.property && direction"
-              width="15"
-              height="15"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
+            <button
+              [ngClass]="{ sortable: sortable && column.sortable }"
+              [disabled]="isLoading"
             >
-              <ng-container *ngSwitchCase="'asc'">
-                <polyline
-                  points="19 10 12 3 5 10"
-                  fill="none"
-                  stroke="white"
-                  stroke-width="3"
-                  stroke-miterlimit="10"
-                />
-                <line
-                  x1="12"
-                  y1="3"
-                  x2="12"
-                  y2="22"
-                  fill="none"
-                  stroke="white"
-                  stroke-width="3"
-                  stroke-miterlimit="10"
-                />
-              </ng-container>
-              <ng-container *ngSwitchCase="'desc'">
-                <polyline
-                  points="5 14 12 21 19 14"
-                  fill="none"
-                  stroke="white"
-                  stroke-width="3"
-                  stroke-miterlimit="10"
-                />
-                <line
-                  x1="12"
-                  y1="21"
-                  x2="12"
-                  y2="2"
-                  fill="none"
-                  stroke="white"
-                  stroke-width="3"
-                  stroke-miterlimit="10"
-                />
-              </ng-container>
-              <ng-container *ngSwitchCase="'none'"></ng-container>
-            </svg>
-            <span>
-              {{ column.name }}
-            </span>
-          </button>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-content
-        *ngIf="
-          isLoading && originalData.length === 0;
-          then thenBlock;
-          else elseBlock
-        "
-      ></ng-content>
-      <ng-template #thenBlock> <div class="loader"></div> </ng-template>
-      <ng-template #elseBlock>
-        <tr *ngFor="let item of displayData">
-          <td *ngFor="let column of columnQuery">
-            <div>
-              {{ item[column.property] }}
-            </div>
-          </td>
+              <!--I've had some problems loading SVG files into the html template, so I added it manually, sorry-->
+              <svg
+                [ngSwitch]="sortProperty === column.property && direction"
+                width="15"
+                height="15"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <ng-container *ngSwitchCase="'asc'">
+                  <polyline
+                    points="19 10 12 3 5 10"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-miterlimit="10"
+                  />
+                  <line
+                    x1="12"
+                    y1="3"
+                    x2="12"
+                    y2="22"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-miterlimit="10"
+                  />
+                </ng-container>
+                <ng-container *ngSwitchCase="'desc'">
+                  <polyline
+                    points="5 14 12 21 19 14"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-miterlimit="10"
+                  />
+                  <line
+                    x1="12"
+                    y1="21"
+                    x2="12"
+                    y2="2"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-miterlimit="10"
+                  />
+                </ng-container>
+                <ng-container *ngSwitchCase="'none'"></ng-container>
+              </svg>
+              <span>
+                {{ column.name }}
+              </span>
+            </button>
+          </th>
         </tr>
-      </ng-template>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <ng-content
+          *ngIf="
+            isLoading && originalData.length === 0;
+            then thenBlock;
+            else elseBlock
+          "
+        ></ng-content>
+        <ng-template #thenBlock> <div class="loader"></div> </ng-template>
+        <ng-template #elseBlock>
+          <tr *cdkVirtualFor="let item of displayData; templateCacheSize: 0">
+            <td *ngFor="let column of columnQuery">
+              <div>
+                {{ item[column.property] }}
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </cdk-virtual-scroll-viewport>
   <div class="control-wrapper" *ngIf="pageSize !== null">
     <div class="total">
       <span>
@@ -92,24 +94,18 @@
       </span>
     </div>
     <div class="page-number">
-      <button
-        [disabled]="isLoading"
-        (click)="updatePageNumber(currentPage - 1)"
-      >
+      <button [disabled]="isLoading" (click)="handlePageChangeButtonClick(-1)">
         Back
       </button>
       <span> Page: {{ currentPage }} </span>
-      <button
-        [disabled]="isLoading"
-        (click)="updatePageNumber(currentPage + 1)"
-      >
+      <button [disabled]="isLoading" (click)="handlePageChangeButtonClick(+1)">
         Next
       </button>
     </div>
     <div class="page-size">
       <label for="pageSize"> Page size: </label>
       <input
-        name="pageSize"
+        id="pageSize"
         type="number"
         min="1"
         [value]="pageSize"

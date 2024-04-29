@@ -149,7 +149,7 @@ describe('TGridComponent', () => {
   it('should display only the data on the current page', () => {
     component.pageSize = 1;
     fixture.detectChanges();
-    component.updatePageNumber(1);
+    component.ngOnInit();
     expect(component.displayData.length).toBe(1);
     expect(component.displayData[0].name).toBe('John');
   });
@@ -160,7 +160,7 @@ describe('TGridComponent', () => {
 
     const changePaginationSpy = spyOn(component.paginationChange, 'emit');
 
-    component.updatePageNumber(2);
+    component.handlePageChangeButtonClick(+1);
     expect(component.displayData.length).toBe(1);
     expect(changePaginationSpy).toHaveBeenCalledOnceWith({
       currentPage: 2,
@@ -174,7 +174,7 @@ describe('TGridComponent', () => {
 
     const changePaginationSpy = spyOn(component.paginationChange, 'emit');
 
-    component.updatePageNumber(2);
+    component.updatePage(2, component.pageSize);
     expect(changePaginationSpy).not.toHaveBeenCalled();
   });
 
@@ -185,15 +185,15 @@ describe('TGridComponent', () => {
 
     const changePaginationSpy = spyOn(component.paginationChange, 'emit');
 
-    component.updatePageNumber(0);
+    component.updatePage(0, component.pageSize);
     expect(component.currentPage).toBe(1);
     expect(changePaginationSpy).not.toHaveBeenCalled();
 
-    component.updatePageNumber(2);
+    component.updatePage(2, component.pageSize);
     expect(component.currentPage).toBe(2);
     expect(changePaginationSpy).toHaveBeenCalledTimes(1);
 
-    component.updatePageNumber(3);
+    component.updatePage(3, component.pageSize);
     expect(component.currentPage).toBe(2);
     expect(changePaginationSpy).toHaveBeenCalledTimes(1);
   });
@@ -227,7 +227,7 @@ describe('TGridComponent', () => {
 
     const changePaginationSpy = spyOn(component.paginationChange, 'emit');
 
-    component.updatePageNumber(2);
+    component.updatePage(2, component.pageSize);
     component.handleColumnClick(nameColumn);
     expect(changePaginationSpy).toHaveBeenCalledWith({
       pageSize: 2,
