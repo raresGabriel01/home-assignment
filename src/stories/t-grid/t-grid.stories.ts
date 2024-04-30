@@ -50,13 +50,33 @@ const meta: Meta<TGridComponent<MockUser>> = {
       `<t-column [name]="columnName" [property]="propertyName">` via content projection',
       name: 'data',
     },
+    sortable: {
+      description:
+        'Indicated the capability of the table to sort via a sortable column',
+      name: 'sortable',
+    },
+    pageSize: {
+      description:
+        'Indicates the size of a page. In case it is `null`, there is no pagination',
+      name: 'pageSize',
+    },
+    sortChange: {
+      description:
+        'Event emitted every time there is a change in sorting (sorting direction or criteria)',
+      name: 'sortChange',
+    },
+    paginationChange: {
+      description:
+        'Event emitted every time there is a change in pagination (page size or current page)',
+      name: 'paginationChange',
+    },
   },
 };
 
 export default meta;
 type Story = StoryObj<TGridComponent<MockUser>>;
 
-export const SortableGrid: Story = {
+export const SortableNonPaginated: Story = {
   args: {
     data: createMockData(30),
     sortable: true,
@@ -64,11 +84,27 @@ export const SortableGrid: Story = {
   },
 };
 
-export const NonSortableGrid: Story = {
+export const NonSortableNonPaginated: Story = {
   args: {
     data: createMockData(30),
     sortable: false,
     pageSize: null,
+  },
+};
+
+export const NonSortablePaginated: Story = {
+  args: {
+    data: createMockData(30),
+    sortable: false,
+    pageSize: 8,
+  },
+};
+
+export const SortablePaginated: Story = {
+  args: {
+    data: createMockData(30),
+    sortable: true,
+    pageSize: 8,
   },
 };
 
@@ -80,15 +116,7 @@ export const LargeDataSet: Story = {
   },
 };
 
-export const PaginatedGrid: Story = {
-  args: {
-    data: createMockData(30),
-    sortable: true,
-    pageSize: 8,
-  },
-};
-
-export const PaginatedAsyncLoading: Story = {
+export const PaginatedAsyncLoadingWithDelayBetweenChunks: Story = {
   args: {
     data: createMockDataObservable(20),
     sortable: true,
