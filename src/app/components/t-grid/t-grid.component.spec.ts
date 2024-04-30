@@ -1,6 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 import { Direction, TGridComponent } from './t-grid.component';
 import { TColumnComponent } from '../t-column/t-column.component';
+import {
+  MockUser,
+  createMockDataObservable,
+} from '../../../stories/t-grid/utils';
 
 type TestData = {
   id: string;
@@ -262,4 +271,17 @@ describe('TGridComponent', () => {
       areNameArraysEqual(component.displayData, ['John', 'Alice', 'Bob']),
     ).toBe(true);
   });
+
+  it('should load data async with observable data pipe delay', fakeAsync(() => {
+    const obsFixture = TestBed.createComponent(TGridComponent<MockUser>);
+    const obsComponent = obsFixture.componentInstance;
+    obsComponent.data = createMockDataObservable(20);
+    obsFixture.detectChanges();
+    expect(obsComponent.isLoading).toBe(true);
+    tick(2500);
+    expect(obsComponent.originalData.length).toBe(20);
+    tick(2500);
+    tick(2500);
+    expect(obsComponent.isLoading).toBe(false);
+  }));
 });
