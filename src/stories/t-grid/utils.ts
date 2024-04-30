@@ -32,7 +32,7 @@ export const createMockData = (count: number) =>
     count,
   });
 
-export const createMockDataObserver = (count: number) => {
+export const createMockDataObservable = (count: number) => {
   const dataObservable = of(
     faker.helpers.multiple(createMockUser, { count }),
     faker.helpers.multiple(createMockUser, { count }),

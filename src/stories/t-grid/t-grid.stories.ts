@@ -4,7 +4,7 @@ import {
   SortChangeEvent,
   TGridComponent,
 } from '../../app/components/t-grid/t-grid.component';
-import { createMockData, MockUser, createMockDataObserver } from './utils';
+import { createMockData, MockUser, createMockDataObservable } from './utils';
 import { TColumnComponent } from '../../app/components/t-column/t-column.component';
 import { CommonModule } from '@angular/common';
 
@@ -90,7 +90,7 @@ export const PaginatedGrid: Story = {
 
 export const PaginatedAsyncLoading: Story = {
   args: {
-    data: createMockDataObserver(20),
+    data: createMockDataObservable(20),
     sortable: true,
     pageSize: 10,
   },
