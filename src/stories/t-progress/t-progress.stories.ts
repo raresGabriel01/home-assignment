@@ -26,6 +26,25 @@ const meta: Meta<TProgressComponent> = {
     `,
   }),
   tags: ['autodocs'],
+  argTypes: {
+    color: {
+      description: 'Color of the SVG circle and text',
+      name: 'color',
+    },
+    radius: {
+      description: 'Radius of the SVG circle',
+      name: 'radius',
+    },
+    progress: {
+      description: 'Percentage of the circle arc fill',
+      name: 'progress',
+    },
+    complete: {
+      description:
+        'Emitted everytime the `progress` input reaches the value 100',
+      name: 'complete',
+    },
+  },
 };
 
 export default meta;
