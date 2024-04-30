@@ -84,6 +84,14 @@ export const SortableNonPaginated: Story = {
   },
 };
 
+export const SortablePaginated: Story = {
+  args: {
+    data: createMockData(30),
+    sortable: true,
+    pageSize: 12,
+  },
+};
+
 export const NonSortableNonPaginated: Story = {
   args: {
     data: createMockData(30),
@@ -96,15 +104,7 @@ export const NonSortablePaginated: Story = {
   args: {
     data: createMockData(30),
     sortable: false,
-    pageSize: 8,
-  },
-};
-
-export const SortablePaginated: Story = {
-  args: {
-    data: createMockData(30),
-    sortable: true,
-    pageSize: 8,
+    pageSize: 12,
   },
 };
 
@@ -120,7 +120,7 @@ export const PaginatedAsyncLoadingWithDelayBetweenChunks: Story = {
   args: {
     data: createMockDataObservable(20),
     sortable: true,
-    pageSize: 10,
+    pageSize: 12,
   },
   render: (args) => ({
     props: {
