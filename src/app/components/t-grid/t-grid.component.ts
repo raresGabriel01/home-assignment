@@ -56,6 +56,8 @@ export class TGridComponent<T> {
 
   originalData: T[] = [];
   sortedData: T[] = [];
+  // this.displayData will represent the data entries to be displayed within the table
+  // usually, a section of this.sortedData
   displayData: T[] = [];
   currentPage: number = 1;
   sortProperty?: keyof T;
@@ -94,14 +96,6 @@ export class TGridComponent<T> {
     }
   }
 
-  getTableHeaderTop() {
-    if (!this.viewPort || !this.viewPort['_renderedContentOffset']) {
-      return '-2px';
-    }
-    let offset = this.viewPort['_renderedContentOffset'];
-    return `-${offset + 2}px`;
-  }
-
   updatePage(pageNumber: number, pageSize: number | null) {
     if (!this.pageSize) {
       return;
@@ -129,13 +123,6 @@ export class TGridComponent<T> {
     });
   }
 
-  handlePageSizeChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const newPageSize = parseInt(input.value);
-    this.updatePage(1, newPageSize);
-    this.updateDisplayData();
-  }
-
   updateDirection() {
     if (this.direction === Direction.NONE) {
       this.direction = Direction.ASCENDING;
@@ -149,6 +136,14 @@ export class TGridComponent<T> {
       columnName: this.sortProperty as string,
       direction: this.direction,
     });
+  }
+
+  updateDisplayData() {
+    const pageSize = this.pageSize || this.sortedData.length;
+    this.displayData = this.sortedData.slice(
+      (this.currentPage - 1) * pageSize,
+      this.currentPage * pageSize,
+    );
   }
 
   sortData() {
@@ -190,11 +185,19 @@ export class TGridComponent<T> {
     }
   }
 
-  updateDisplayData() {
-    const pageSize = this.pageSize || this.sortedData.length;
-    this.displayData = this.sortedData.slice(
-      (this.currentPage - 1) * pageSize,
-      this.currentPage * pageSize,
-    );
+  handlePageSizeChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newPageSize = parseInt(input.value);
+    this.updatePage(1, newPageSize);
+    this.updateDisplayData();
+  }
+
+  // A hack-ish way to get the `top` attribute value for the sticky <thead>
+  getTableHeaderTop() {
+    if (!this.viewPort || !this.viewPort['_renderedContentOffset']) {
+      return '-2px';
+    }
+    const offset = this.viewPort['_renderedContentOffset'];
+    return `-${offset + 2}px`;
   }
 }
